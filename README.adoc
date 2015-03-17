@@ -2,6 +2,19 @@
 
 Tweak the starter code as necessary to implement your final project.
 
+Go into your repo to receive this starter code:
+
+----
+$ git remote add prof git@github.com:lawrancej/COMP201Project.git
+
+$ git pull prof master
+From github.com:lawrancej/COMP201Project
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> prof/master
+
+$ git mergetool
+----
+
 Form small groups of 2-3 people (no more than 4, please) to create some
 program with a cool demo.
 
