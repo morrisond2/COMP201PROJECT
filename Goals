@@ -1,0 +1,30 @@
+Minimum Goals
+
+-award points for row, more points for multiple rows via doubling
+-pieces randomly selected for order (7 pieces)
+-pieces need to rotate
+-one button instant drop to to bottom
+-background grid
+-show first next piece
+-show score
+-draw pieces from images or live build them in the code
+-end when next piece starts where a piece is placed
+-highscores text file (sort highest to lowest?)
+-UI - say game over when lost then after a few seconds ask to record score
+    - Tetris at top of screen somewhere
+
+Ideal Goals (to be done once minimum have been met)
+- hold piece
+- show where piece will land
+- flash points and how many rows were cleared
+- game speads up as level advances
+- level graphic
+- show highscorse (sort them highest to lowest)
+- statistics window for each block
+
+Super Ideal
+- integrate awesome 8-bit russian music
+- flashy explosions
+
+Impossibly but Super Awesome
+- 3D compatibility
