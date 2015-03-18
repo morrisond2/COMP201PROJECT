@@ -9,3 +9,7 @@ pieces have a few milliseconds on landing to rotate
 7 traditional pieces
 
 game ends when your pile hits top of screen, there is no win condition, only a lose
+  - when a block gets place in either the 21st or 22nd rows then the game is over
+
+screen is 22 high by 10 wide blocks
+  - top 2 rows are not rendered
