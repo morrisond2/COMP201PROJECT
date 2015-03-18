@@ -80,10 +80,12 @@ void View::show(Model * model) {
     SDL_Rect dest;
     dest.w = 16;
     dest.h = 16;
-    
+    // block location
     dest.x = model->block.x * 16;
     dest.y = model->block.y * 16;
-    SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    // block color
+    SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0x00, 0x80, 0x00));
+    
 
     SDL_UpdateWindowSurface(window);
 }
