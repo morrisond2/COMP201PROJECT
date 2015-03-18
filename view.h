@@ -1,16 +1,11 @@
 
 #define SDL_MAIN_HANDLED
-<<<<<<< HEAD
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
-=======
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_ttf.h>
->>>>>>> 99c2036d14e11d301933c48cae3f6fb40a167943
+
 #include "model.h"
 #include <map>
 #include <string>
