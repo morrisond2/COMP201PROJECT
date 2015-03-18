@@ -4,7 +4,7 @@
 using namespace std;
 
 Controller::Controller() {
-    model = new Model();
+    model = new Model(48,32);
     view = new View("Tetris", 512, 768);
 }
 
@@ -52,5 +52,5 @@ void Controller::loop() {
     }
     // TODO: show something nice?
     view->show(model);
-    SDL_Delay(3000);
+    SDL_Delay(1000);
 }

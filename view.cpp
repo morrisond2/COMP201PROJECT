@@ -75,6 +75,15 @@ void View::show(Model * model) {
         0x00, 0x00, 0x00));
 
     // Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
+    
+    // making a 16 by 16 pixel block
+    SDL_Rect dest;
+    dest.w = 16;
+    dest.h = 16;
+    
+    dest.x = model->block.x * 16;
+    dest.y = model->block.y * 16;
+    SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
 
     SDL_UpdateWindowSurface(window);
 }
