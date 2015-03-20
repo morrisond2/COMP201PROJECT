@@ -26,6 +26,10 @@ public:
     // Let blocks fall
     void fall();
     
+    // Go left or right
+    void go(Direction d);
+    
+    
 private:
     int height, width;
     bool ended;
