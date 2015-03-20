@@ -30,6 +30,11 @@ void Controller::loop() {
         currentTime = SDL_GetTicks();
         // Do stuff here to animate as necessary
         view->show(model);
+        // Change the time update to make game faster
+        if (currentTime > lastTime + 500) {
+            model->fall();
+            lastTime = currentTime;
+        }
         if (SDL_PollEvent(&e) != 0) {
             switch (e.type) {
             case SDL_QUIT:

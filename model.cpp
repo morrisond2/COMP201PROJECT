@@ -11,8 +11,8 @@ Model::Model(int h, int w) {
     width = w;
     // Seed random number generator with time
     srand(time(0));
-    block.x = rand()%width;
-    block.y = rand()%height;
+    block.x = 16;       // for random placement: rand()%width;
+    block.y = 0;        // for random placement: rand()%height;
 }
 // Destructor deletes dynamically allocated memory
 Model::~Model() {
@@ -22,3 +22,9 @@ bool Model::gameOver() {
     return false;
 }
 
+void Model::fall() {
+    block.y++;
+    if (block.y >= 47) {
+        block.y = 47;
+    }
+}

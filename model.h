@@ -17,9 +17,14 @@ public:
     ~Model();
     // Is the game over?
     bool gameOver();
+    
     // TODO: Put your stuff here
     
+    // A block
     Coordinate block;
+    
+    // Let blocks fall
+    void fall();
     
 private:
     int height, width;
