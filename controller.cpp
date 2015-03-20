@@ -4,8 +4,8 @@
 using namespace std;
 
 Controller::Controller() {
-    model = new Model();
-    view = new View("Game", 1024, 768);
+    model = new Model(48,32);
+    view = new View("Tetris", 512, 768);
 }
 
 Controller::~Controller() {
@@ -30,6 +30,11 @@ void Controller::loop() {
         currentTime = SDL_GetTicks();
         // Do stuff here to animate as necessary
         view->show(model);
+        // Change the time update to make game faster
+        if (currentTime > lastTime + 500) {
+            model->fall();
+            lastTime = currentTime;
+        }
         if (SDL_PollEvent(&e) != 0) {
             switch (e.type) {
             case SDL_QUIT:
@@ -52,5 +57,5 @@ void Controller::loop() {
     }
     // TODO: show something nice?
     view->show(model);
-    SDL_Delay(3000);
+    SDL_Delay(1000);
 }
