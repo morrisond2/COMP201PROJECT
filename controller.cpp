@@ -31,7 +31,7 @@ void Controller::loop() {
         // Do stuff here to animate as necessary
         view->show(model);
         // Decrease the update time interval to make game faster
-        if (currentTime > lastTime + 200) {
+        if (currentTime > lastTime + 350) {
             model->fall();
             lastTime = currentTime;
         }
