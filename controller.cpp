@@ -4,7 +4,7 @@
 using namespace std;
 
 Controller::Controller() {
-    model = new Model(48,32);
+    model = new Model(24,16);
     view = new View("Tetris", 512, 768);
 }
 
@@ -30,8 +30,8 @@ void Controller::loop() {
         currentTime = SDL_GetTicks();
         // Do stuff here to animate as necessary
         view->show(model);
-        // Change the time update to make game faster
-        if (currentTime > lastTime + 500) {
+        // Decrease the update time interval to make game faster
+        if (currentTime > lastTime + 350) {
             model->fall();
             lastTime = currentTime;
         }
@@ -43,12 +43,13 @@ void Controller::loop() {
                 switch(e.key.keysym.sym) {
                 case SDLK_DOWN:
                 case SDLK_UP:
+                        break;
                 case SDLK_LEFT:
                 case SDLK_RIGHT:
-//                    model->go(direction[e.key.keysym.sym]);
-                break;
+                        model->go(direction[e.key.keysym.sym]);
+                        break;
                 default:
-                break;
+                        break;
                 }
             case SDL_MOUSEBUTTONDOWN:
                 break;

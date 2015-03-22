@@ -3,6 +3,11 @@
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
+enum Tetrominoe {
+    // see http://tetris.wikia.com/wiki/Tetromino for the names
+    I, O, T, S, Z, J, L
+};
+
 typedef struct {
     int x;
     int y;
@@ -20,14 +25,24 @@ public:
     
     // TODO: Put your stuff here
     
-    // A block
-    Coordinate block;
-    
+    // Building blocks for Tetrominoes
+    Coordinate block1, block2, block3, block4;
     // Let blocks fall
     void fall();
+    // Go left or right
+    void go(Direction d);
+    // the falling shape
+    Tetrominoe shape;
+    // the grid of blocks
+    bool ** grid;
+    // make Tetrominoe
+    void spawn(Tetrominoe shape);
+    // keep Tetrominoe in shape
+    void build(Tetrominoe shape);
     
 private:
     int height, width;
+    int randomNum;
     bool ended;
 };
 
