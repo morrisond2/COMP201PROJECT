@@ -13,11 +13,21 @@ Model::Model(int h, int w) {
     // Seed random number generator with time
     srand(time(0));
     randomNum = rand()%7;
-    shape = Tetrominoe(randomNum);
-    this->spawn(shape);
-    grid = new bool*[height];
-    for (int i=0; i < height; i++) {
+    //cout << randomNum << endl;
+    piece = Tetrominoe(randomNum);
+    //pieces.push_back(piece);
+    this->spawn(piece);
+    // making a boolean grid to check where blocks are
+    grid = new bool*[height+1];
+    for (int i=0; i <= height; i++) {
         grid[i] = new bool[width];
+        for (int j=0; j<width; j++) {
+            if (i==height) {
+                grid[i][j] = true;
+            } else {
+                grid[i][j] = false;
+            }
+        }
     }
 }
 // Destructor deletes dynamically allocated memory
@@ -30,6 +40,13 @@ Model::~Model() {
 
 bool Model::gameOver() {
     return false;
+}
+
+void Model::randomPiece() {
+    randomNum = rand()%7;
+    piece = Tetrominoe(randomNum);
+    //pieces.push_back(piece);
+    this->spawn(piece);
 }
 
 void Model::spawn(Tetrominoe shape) {
@@ -146,7 +163,7 @@ void Model::fall() {
     block4.y++;
     if (block1.y >= 22) {
         block1.y = 22;
-        build(shape);
+        build(piece);
     }
 }
 
