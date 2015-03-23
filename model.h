@@ -2,6 +2,7 @@
 #define _MODEL_H
 
 #include <vector>
+#include <random>
 using namespace std;
 
 enum Direction { UP, DOWN, LEFT, RIGHT };

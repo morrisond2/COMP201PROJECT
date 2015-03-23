@@ -10,11 +10,7 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
-    // Seed random number generator with time
-    srand(time(0));
-    randomNum = rand()%7;
-    //cout << randomNum << endl;
-    piece = Tetrominoe(randomNum);
+    piece = (Tetrominoe)(time(0)%7);
     //pieces.push_back(piece);
     this->spawn(piece);
     // making a boolean grid to check where blocks are
@@ -43,7 +39,8 @@ bool Model::gameOver() {
 }
 
 void Model::randomPiece() {
-    randomNum = rand()%7;
+    uniform_int_distribution<int> distribution(0,6);
+    randomNum = distribution(generator);
     piece = Tetrominoe(randomNum);
     //pieces.push_back(piece);
     this->spawn(piece);
@@ -70,6 +67,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case T:
             block1.x = 7;
             block2.x = 6;
@@ -79,6 +77,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y+1;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case S:
             block1.x = 7;
             block2.x = 8;
@@ -88,6 +87,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case Z:
             block1.x = 6;
             block2.x = 7;
@@ -97,6 +97,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case J:
             block1.x = 6;
             block2.x = 6;
@@ -106,6 +107,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y+1;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case L:
             block1.x = 8;
             block2.x = 6;
@@ -115,6 +117,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y+1;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         default:
             break;
     }
