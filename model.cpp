@@ -39,9 +39,7 @@ bool Model::gameOver() {
 }
 
 void Model::randomPiece() {
-    uniform_int_distribution<int> distribution(0,6);
-    randomNum = distribution(generator);
-    piece = Tetrominoe(randomNum);
+    piece = (Tetrominoe)(time(0)%7);
     //pieces.push_back(piece);
     this->spawn(piece);
 }
