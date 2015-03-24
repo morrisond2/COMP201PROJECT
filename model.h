@@ -44,7 +44,7 @@ public:
     // the falling shape
     vector<Shape> pieces;
     // the grid of blocks
-    bool ** grid;
+    bool grid[21][10];
     // make Tetrominoe
     void spawn(Tetrominoe shape);
     // keep Tetrominoe in shape

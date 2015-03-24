@@ -14,9 +14,7 @@ Model::Model(int h, int w) {
     //pieces.push_back(piece);
     this->spawn(piece);
     // making a boolean grid to check where blocks are
-    grid = new bool*[height+1];
-    for (int i=0; i <= height; i++) {
-        grid[i] = new bool[width];
+    for (int i=0; i<=height; i++) {
         for (int j=0; j<width; j++) {
             if (i==height) {
                 grid[i][j] = true;
@@ -28,10 +26,6 @@ Model::Model(int h, int w) {
 }
 // Destructor deletes dynamically allocated memory
 Model::~Model() {
-    for (int i = 0; i < height; i++) {
-        delete grid[i];
-    }
-    delete grid;
 }
 
 bool Model::gameOver() {
@@ -158,13 +152,14 @@ void Model::build(Tetrominoe shape) {
 }
 
 void Model::fall() {
-    block1.y++;
-    block2.y++;
-    block3.y++;
-    block4.y++;
-    if (block1.y >= height-2) {
-        block1.y = height-2;
-        build(piece);
+    if (grid[block1.x][block1.y]) {
+        // adjust boolean grid here
+        
+    } else {
+        block1.y++;
+        block2.y++;
+        block3.y++;
+        block4.y++;
     }
 }
 
