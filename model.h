@@ -33,7 +33,7 @@ public:
     // TODO: Put your stuff here
     
     // Building blocks for Tetrominoes
-    Coordinate block1, block2, block3, block4;
+    Coordinate block[4];
     Shape tetro;
     // Let blocks fall
     void fall();
