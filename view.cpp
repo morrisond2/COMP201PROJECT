@@ -36,10 +36,10 @@ View::View(string title, int width, int height) {
     }
     // Load assets
 //    snake = load("assets/snake.png");
-//    music = Mix_LoadMUS("assets/2Inventions_-_Johaness_Gilther_-_Don_t_leave_me.mp3");
-//    if (music != NULL) {
-//       Mix_PlayMusic( music, -1 );
-//    }
+    music = Mix_LoadMUS("assets/TetrisTheme.mp3");
+    if (music != NULL) {
+       Mix_PlayMusic( music, -1 );
+    }
 //    food = Mix_LoadWAV("assets/yummy.wav");
     font = TTF_OpenFont( "assets/LiberationSans-Regular.ttf", 28 );
 
@@ -116,6 +116,32 @@ void View::show(Model * model) {
 
 
     // Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
+    
+    // making four 32 by 32 pixel blocks
+    SDL_Rect dest1, dest2, dest3, dest4;
+    dest1.w = 32;
+    dest1.h = 32;
+    dest2.w = 32;
+    dest2.h = 32;
+    dest3.w = 32;
+    dest3.h = 32;
+    dest4.w = 32;
+    dest4.h = 32;
+    // block locations
+    dest1.x = model->block1.x * 32;
+    dest1.y = model->block1.y * 32;
+    dest2.x = model->block2.x * 32;
+    dest2.y = model->block2.y * 32;
+    dest3.x = model->block3.x * 32;
+    dest3.y = model->block3.y * 32;
+    dest4.x = model->block4.x * 32;
+    dest4.y = model->block4.y * 32;
+    // block color
+    SDL_FillRect(screen, &dest1, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    SDL_FillRect(screen, &dest2, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    SDL_FillRect(screen, &dest3, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    SDL_FillRect(screen, &dest4, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    
 
     SDL_UpdateWindowSurface(window);
    
