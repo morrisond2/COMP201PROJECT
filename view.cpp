@@ -88,13 +88,13 @@ void View::show(Model * model) {
     dest4.h = 32;
     // block locations
     dest1.x = 352 + model->block1.x * 32;
-    dest1.y = model->block1.y * 32;
+    dest1.y = 32 + model->block1.y * 32;
     dest2.x = 352 + model->block2.x * 32;
-    dest2.y = model->block2.y * 32;
+    dest2.y = 32 + model->block2.y * 32;
     dest3.x = 352 + model->block3.x * 32;
-    dest3.y = model->block3.y * 32;
+    dest3.y = 32 + model->block3.y * 32;
     dest4.x = 352 + model->block4.x * 32;
-    dest4.y = model->block4.y * 32;
+    dest4.y = 32 + model->block4.y * 32;
     // block color
     SDL_FillRect(screen, &dest1, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
     SDL_FillRect(screen, &dest2, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
