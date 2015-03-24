@@ -187,4 +187,13 @@ void Model::go(Direction d) {
             block4.x++;
         }
     }
+    if (d == DOWN) {
+        if (block1.y >= 19 || block2.y >= 19 || block3.y >= 19 || block4.y >= 19) {
+        } else {
+            block1.y++;
+            block2.y++;
+            block3.y++;
+            block4.y++;
+        }
+    }
 }
