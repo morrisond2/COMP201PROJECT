@@ -77,30 +77,15 @@ void View::show(Model * model) {
     // Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
     
     // making four 32 by 32 pixel blocks
-    SDL_Rect dest1, dest2, dest3, dest4;
-    dest1.w = 32;
-    dest1.h = 32;
-    dest2.w = 32;
-    dest2.h = 32;
-    dest3.w = 32;
-    dest3.h = 32;
-    dest4.w = 32;
-    dest4.h = 32;
-    // block locations
-    dest1.x = model->block[0].x * 32;
-    dest1.y = model->block[0].y * 32;
-    dest2.x = model->block[1].x * 32;
-    dest2.y = model->block[1].y * 32;
-    dest3.x = model->block[2].x * 32;
-    dest3.y = model->block[2].y * 32;
-    dest4.x = model->block[3].x * 32;
-    dest4.y = model->block[3].y * 32;
-    // block color
-    SDL_FillRect(screen, &dest1, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
-    SDL_FillRect(screen, &dest2, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
-    SDL_FillRect(screen, &dest3, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
-    SDL_FillRect(screen, &dest4, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
-    
+    SDL_Rect dest[4];
+	Coordinate * block = model->block();
+	for (int i = 0; i < 4; i++) {
+		dest[i].w = 32;
+		dest[i].h = 32;
+		dest[i].x = (block[i].x + model->location.x) * 32;
+		dest[i].y = (block[i].y + model->location.y) * 32;
+		SDL_FillRect(screen, &dest[i], SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+	}
 
     SDL_UpdateWindowSurface(window);
 }

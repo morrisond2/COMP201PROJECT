@@ -14,7 +14,7 @@ EXECUTABLE=final.exe
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE):
-	$(CC) -g $(SOURCES) $(LDFLAGS) -o $@
+	$(CC) -g -std=c++11 $(SOURCES) $(LDFLAGS) -o $@
 
 clean:
 	rm $(EXECUTABLE)

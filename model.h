@@ -16,9 +16,6 @@ typedef struct {
     int y;
 } Coordinate;
 
-typedef struct {
-    Coordinate block1, block2, block3, block4;
-} Shape;
 
 // The model manages the state of the game
 class Model {
@@ -31,30 +28,28 @@ public:
     bool gameOver();
     
     // TODO: Put your stuff here
-    
-    // Building blocks for Tetrominoes
-    Coordinate block[4];
-    Shape tetro;
+
+	// The way the block is facing
+	Direction orientation;
+	// Where is the falling block?
+	Coordinate location;
     // Let blocks fall
     void fall();
     // Go left or right
     void go(Direction d);
-    // the falling shape
-    vector<Shape> pieces;
     // the grid of blocks
     bool ** grid;
     // make Tetrominoe
-    void spawn(Tetrominoe shape);
-    // keep Tetrominoe in shape
-    void build(Tetrominoe shape);
-    // chose random Tetrominoe
-    void randomPiece();
-    
+    void spawn();
+    // Build up the pile
+    void build();
+	// Get the current block
+	Coordinate * block();
 private:
     int height, width;
     int randomNum;
     bool ended;
-    Tetrominoe piece;
+    Tetrominoe shape;
 };
 
 #endif
