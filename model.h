@@ -2,7 +2,7 @@
 #define _MODEL_H
 
 #include <vector>
-#include <random>
+
 using namespace std;
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
@@ -18,7 +18,8 @@ typedef struct {
 } Coordinate;
 
 typedef struct {
-    Coordinate block1, block2, block3, block4;
+    Coordinate block[4];
+    Coordinate location;
 } Shape;
 
 // The model manages the state of the game
@@ -53,9 +54,9 @@ public:
     
 private:
     int height, width;
-    int randomNum;
     bool ended;
     Tetrominoe piece;
+    Direction orientation;
 };
 
 #endif

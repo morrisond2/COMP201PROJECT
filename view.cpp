@@ -87,19 +87,37 @@ void View::show(Model * model) {
     dest4.w = 32;
     dest4.h = 32;
     // block locations
-    dest1.x = model->block1.x * 32;
+    dest1.x = 352 + model->block1.x * 32;
     dest1.y = model->block1.y * 32;
-    dest2.x = model->block2.x * 32;
+    dest2.x = 352 + model->block2.x * 32;
     dest2.y = model->block2.y * 32;
-    dest3.x = model->block3.x * 32;
+    dest3.x = 352 + model->block3.x * 32;
     dest3.y = model->block3.y * 32;
-    dest4.x = model->block4.x * 32;
+    dest4.x = 352 + model->block4.x * 32;
     dest4.y = model->block4.y * 32;
     // block color
     SDL_FillRect(screen, &dest1, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
     SDL_FillRect(screen, &dest2, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
     SDL_FillRect(screen, &dest3, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
     SDL_FillRect(screen, &dest4, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    
+    // making a line for the play space
+    SDL_Rect line1, line2, line3;
+    line1.w = 8;
+    line1.h = 32*20;
+    line2.w = 8;
+    line2.h = 32*20;
+    line3.w = 32*10+16;
+    line3.h = 8;
+    line1.x = 352-8;
+    line1.y = 0;
+    line2.x = 352+32*10;
+    line2.y = 0;
+    line3.x = 352-8;
+    line3.y = 32*20;
+    SDL_FillRect(screen, &line1, SDL_MapRGB(screen->format, 0x80, 0x80, 0x80));
+    SDL_FillRect(screen, &line2, SDL_MapRGB(screen->format, 0x80, 0x80, 0x80));
+    SDL_FillRect(screen, &line3, SDL_MapRGB(screen->format, 0x80, 0x80, 0x80));
     
 
     SDL_UpdateWindowSurface(window);

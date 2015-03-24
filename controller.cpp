@@ -4,8 +4,8 @@
 using namespace std;
 
 Controller::Controller() {
-    model = new Model(24,16);
-    view = new View("Tetris", 512, 768);
+    model = new Model(20,10);
+    view = new View("Tetris", 1024, 768);
 }
 
 Controller::~Controller() {

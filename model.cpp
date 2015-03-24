@@ -162,8 +162,8 @@ void Model::fall() {
     block2.y++;
     block3.y++;
     block4.y++;
-    if (block1.y >= 22) {
-        block1.y = 22;
+    if (block1.y >= height-2) {
+        block1.y = height-2;
         build(piece);
     }
 }
@@ -179,7 +179,7 @@ void Model::go(Direction d) {
         }
     }
     if (d == RIGHT) {
-        if (block1.x == 15 || block2.x == 15 || block3.x == 15 || block4.x == 15) {
+        if (block1.x == width-1 || block2.x == width-1 || block3.x == width-1 || block4.x == width-1) {
         } else {
             block1.x++;
             block2.x++;
