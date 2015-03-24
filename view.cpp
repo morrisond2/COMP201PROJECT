@@ -18,6 +18,7 @@ View::View(string title, int width, int height) {
     }
     // Get the screen
     screen = SDL_GetWindowSurface(window);
+  
     //Initialize JPEG and PNG loading
     if( !( IMG_Init( IMG_INIT_JPG|IMG_INIT_PNG ) & (IMG_INIT_JPG|IMG_INIT_PNG) ) ) {
         fail = true;
@@ -69,12 +70,53 @@ SDL_Surface* View::load(char * path) {
     return optimizedSurface;
 }
 
-void View::show(Model * model) {
 
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,
-        0x00, 0x00, 0x00));
+void View::show(Model * model) {
+    SDL_Rect one;
+    one.x=74;
+    one.y=98;
+    one.w=204;
+    one.h=154;
+    SDL_Rect two;
+    two.x=350;
+    two.y=30;
+    two.w=324;
+    two.h=708;
+    SDL_Rect three;
+    three.x=746;
+    three.y=98;
+    three.w=204;
+    three.h=404;
+  
+
+    SDL_Rect onet;
+    onet.x=76;
+    onet.y=100;
+    onet.w=200;
+    onet.h=150;
+    SDL_Rect twot;
+    twot.x=352;
+    twot.y=32;
+    twot.w=320;
+    twot.h=704;
+    SDL_Rect threet;
+    threet.x=748;
+    threet.y=100;
+    threet.w=200;
+    threet.h=400;
+    
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
+   
+    SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 255,0,0));
+    SDL_FillRect(screen, &two, SDL_MapRGB(screen->format, 255,0,0));
+    SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 255,0,0));
+    SDL_FillRect(screen, &onet, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_FillRect(screen, &twot, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_FillRect(screen, &threet, SDL_MapRGB(screen->format, 0,0,0));
+
 
     // Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
 
     SDL_UpdateWindowSurface(window);
+   
 }
