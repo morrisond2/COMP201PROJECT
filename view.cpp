@@ -35,10 +35,10 @@ View::View(string title, int width, int height) {
     }
     // Load assets
 //    snake = load("assets/snake.png");
-//    music = Mix_LoadMUS("assets/2Inventions_-_Johaness_Gilther_-_Don_t_leave_me.mp3");
-//    if (music != NULL) {
-//       Mix_PlayMusic( music, -1 );
-//    }
+    music = Mix_LoadMUS("assets/TetrisTheme.mp3");
+    if (music != NULL) {
+       Mix_PlayMusic( music, -1 );
+    }
 //    food = Mix_LoadWAV("assets/yummy.wav");
     font = TTF_OpenFont( "assets/LiberationSans-Regular.ttf", 28 );
 
