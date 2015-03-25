@@ -87,8 +87,6 @@ void View::show(Model * model) {
     three.y=98;
     three.w=204;
     three.h=404;
-  
-
     SDL_Rect onet;
     onet.x=76;
     onet.y=100;
@@ -105,15 +103,39 @@ void View::show(Model * model) {
     threet.w=200;
     threet.h=400;
     
+    int d=352;
+    SDL_Rect bottom[10];
+    for (int i=0;i<10;i++)
+    {
+        bottom[i].x=d+32;
+        bottom[i].y=32;
+        bottom[i].w=1;
+        bottom[i].h=704;
+        d=d+32;
+        
+    }
+    
+    int b=32;
+    SDL_Rect side[22];
+    for(int i = 0; i < 22; i++)
+    {
+        side[i].x=352;
+        side[i].y=b+32;
+        side[i].w=320;
+        side[i].h=1;
+        b=b+32;
+    }
+    
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
    
-    SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 255,0,0));
-    SDL_FillRect(screen, &two, SDL_MapRGB(screen->format, 255,0,0));
-    SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 255,0,0));
+    SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &two, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &onet, SDL_MapRGB(screen->format, 0,0,0));
     SDL_FillRect(screen, &twot, SDL_MapRGB(screen->format, 0,0,0));
     SDL_FillRect(screen, &threet, SDL_MapRGB(screen->format, 0,0,0));
-
+    SDL_FillRects(screen, bottom, 10, SDL_MapRGB(screen->format, 64,64,64));
+    SDL_FillRects(screen, side, 22, SDL_MapRGB(screen->format, 64,64,64));
 
     // Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
     
