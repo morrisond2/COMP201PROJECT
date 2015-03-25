@@ -5,14 +5,14 @@ using namespace std;
 
 Controller::Controller() {
     model = new Model(20,10);
-    view = new View("Tetris", 1024, 760);
+    view = new View("Tetris", 1024, 768);
 }
 
 Controller::~Controller() {
     delete model;
     delete view;
 }
-/**
+/*
 References:
 https://wiki.libsdl.org/SDL_PollEvent
 https://wiki.libsdl.org/SDL_Event
@@ -41,9 +41,9 @@ void Controller::loop() {
                 return;
             case SDL_KEYDOWN:
                 switch(e.key.keysym.sym) {
-                case SDLK_DOWN:
                 case SDLK_UP:
                         break;
+                case SDLK_DOWN:
                 case SDLK_LEFT:
                 case SDLK_RIGHT:
                         model->go(direction[e.key.keysym.sym]);

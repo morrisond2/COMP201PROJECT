@@ -10,14 +10,9 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
-    // Seed random number generator with time
-    srand(time(0));
-	// Spawn piece
-    this->spawn();
+    piece = (Tetrominoe)(time(0)%7);
     // making a boolean grid to check where blocks are
-    grid = new bool*[height+1];
-    for (int i=0; i <= height; i++) {
-        grid[i] = new bool[width];
+    for (int i=0; i<=height; i++) {
         for (int j=0; j<width; j++) {
             if (i==height) {
                 grid[i][j] = true;
@@ -29,10 +24,6 @@ Model::Model(int h, int w) {
 }
 // Destructor deletes dynamically allocated memory
 Model::~Model() {
-    for (int i = 0; i < height; i++) {
-        delete grid[i];
-    }
-    delete grid;
 }
 
 bool Model::gameOver() {
@@ -40,8 +31,7 @@ bool Model::gameOver() {
 }
 
 // Create a new piece
-void Model::spawn() {
-    shape = (Tetrominoe)(rand()%7);
+    shape = (Tetrominoe)(time(0)%7);
 	orientation = DOWN;
 	location.x = 7;
 	location.y = 0;
@@ -92,6 +82,9 @@ Coordinate * Model::block() {
 
     // Building blocks for Tetrominoes
 	return blocks[orientation][shape];
+            break;
+            break;
+            break;
 }
 
 // This should build up the pile structure (and do collision detection)
@@ -149,8 +142,17 @@ void Model::go(Direction d) {
         }
     }
     if (d == RIGHT) {
-        if (location.x < 15) {
+        if (location.x < 10) {
             location.x++;
+        }
+    }
+    if (d == DOWN) {
+        if (block1.y >= 19 || block2.y >= 19 || block3.y >= 19 || block4.y >= 19) {
+        } else {
+            block1.y++;
+            block2.y++;
+            block3.y++;
+            block4.y++;
         }
     }
 	if (d == UP) {
