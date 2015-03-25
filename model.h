@@ -2,19 +2,21 @@
 #define _MODEL_H
 
 #include <vector>
+
 using namespace std;
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
 enum Tetrominoe {
     // see http://tetris.wikia.com/wiki/Tetromino for the names
-    I=0, O, T, S, Z, J, L
+    I, O, T, S, Z, J, L
 };
 
 typedef struct {
     int x;
     int y;
 } Coordinate;
+
 
 
 // The model manages the state of the game
@@ -29,8 +31,6 @@ public:
     
     // TODO: Put your stuff here
 
-	// The way the block is facing
-	Direction orientation;
 	// Where is the falling block?
 	Coordinate location;
     // Let blocks fall
@@ -38,18 +38,19 @@ public:
     // Go left or right
     void go(Direction d);
     // the grid of blocks
-    bool ** grid;
+    bool grid[21][10];
     // make Tetrominoe
     void spawn();
     // Build up the pile
     void build();
 	// Get the current block
 	Coordinate * block();
+	int right();
 private:
     int height, width;
-    int randomNum;
     bool ended;
     Tetrominoe shape;
+    Direction orientation;
 };
 
 #endif
