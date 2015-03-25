@@ -31,8 +31,6 @@ public:
     
     // TODO: Put your stuff here
 
-	// The way the block is facing
-	Direction orientation;
 	// Where is the falling block?
 	Coordinate location;
     // Let blocks fall
@@ -47,6 +45,7 @@ public:
     void build();
 	// Get the current block
 	Coordinate * block();
+	int right();
 private:
     int height, width;
     bool ended;

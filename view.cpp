@@ -145,8 +145,8 @@ void View::show(Model * model) {
 	for (int i = 0; i < 4; i++) {
 		dest[i].w = 32;
 		dest[i].h = 32;
-		dest[i].x = (block[i].x + model->location.x) * 32;
-		dest[i].y = (block[i].y + model->location.y) * 32;
+		dest[i].x = 352+ (block[i].x + model->location.x) * 32;
+		dest[i].y = 32 + (block[i].y + model->location.y) * 32;
 		SDL_FillRect(screen, &dest[i], SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
 	}
 

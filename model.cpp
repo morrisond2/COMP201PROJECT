@@ -10,7 +10,7 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
-    piece = (Tetrominoe)(time(0)%7);
+    shape = (Tetrominoe)(time(0)%7);
     // making a boolean grid to check where blocks are
     for (int i=0; i<=height; i++) {
         for (int j=0; j<width; j++) {
@@ -21,6 +21,7 @@ Model::Model(int h, int w) {
             }
         }
     }
+	spawn();
 }
 // Destructor deletes dynamically allocated memory
 Model::~Model() {
@@ -30,10 +31,11 @@ bool Model::gameOver() {
     return false;
 }
 
+void Model::spawn() {
 // Create a new piece
     shape = (Tetrominoe)(time(0)%7);
 	orientation = DOWN;
-	location.x = 7;
+	location.x = 5;
 	location.y = 0;
 }
 
@@ -82,57 +84,30 @@ Coordinate * Model::block() {
 
     // Building blocks for Tetrominoes
 	return blocks[orientation][shape];
-            break;
-            break;
-            break;
 }
 
 // This should build up the pile structure (and do collision detection)
 void Model::build() {
-	/*
-    switch (shape) {
-        case I:
-            block[1].y = block[0].y;
-            block[2].y = block[0].y;
-            block[3].y = block[0].y;
-            break;
-        case O:
-            block[1].y = block[0].y;
-            block[2].y = block[0].y+1;
-            block[3].y = block[0].y+1;
-        case T:
-            block[1].y = block[0].y+1;
-            block[2].y = block[0].y+1;
-            block[3].y = block[0].y+1;
-        case S:
-            block[1].y = block[0].y;
-            block[2].y = block[0].y+1;
-            block[3].y = block[0].y+1;
-        case Z:
-            block[1].y = block[0].y;
-            block[2].y = block[0].y+1;
-            block[3].y = block[0].y+1;
-        case J:
-            block[1].y = block[0].y+1;
-            block[2].y = block[0].y+1;
-            block[3].y = block[0].y+1;
-        case L:
-            block[1].y = block[0].y+1;
-            block[2].y = block[0].y+1;
-            block[3].y = block[0].y+1;
-        default:
-            break;
-    }
-	*/
 }
 
 void Model::fall() {
-	if (location.y < 22) {
-	location.y++;
-	cout << location.y << endl;
+	if (location.y < 20) {
+		location.y++;
+		cout << location.y << endl;
 	} else {
         build();
 	}
+}
+
+int Model::right() {
+	int result = 0;
+	Coordinate * blck = block();
+	for (int i =  0; i < 4; i++) {
+		if (blck[i].x + location.x > result) {
+			result = (blck[i].x + location.x);
+		}
+	}
+	return result;
 }
 
 void Model::go(Direction d) {
@@ -142,18 +117,12 @@ void Model::go(Direction d) {
         }
     }
     if (d == RIGHT) {
-        if (location.x < 10) {
+        if (right() < 9) {
             location.x++;
         }
     }
     if (d == DOWN) {
-        if (block1.y >= 19 || block2.y >= 19 || block3.y >= 19 || block4.y >= 19) {
-        } else {
-            block1.y++;
-            block2.y++;
-            block3.y++;
-            block4.y++;
-        }
+		fall();
     }
 	if (d == UP) {
 		orientation = (Direction)((((int)orientation) + 1) % 4);
