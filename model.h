@@ -8,7 +8,7 @@ enum Direction { UP, DOWN, LEFT, RIGHT };
 
 enum Tetrominoe {
     // see http://tetris.wikia.com/wiki/Tetromino for the names
-    I=0, O, T, S, Z, J, L
+    I, O, T, S, Z, J, L
 };
 
 typedef struct {
