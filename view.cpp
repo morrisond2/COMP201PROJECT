@@ -137,8 +137,31 @@ void View::show(Model * model) {
     SDL_FillRects(screen, bottom, 10, SDL_MapRGB(screen->format, 64,64,64));
     SDL_FillRects(screen, side, 22, SDL_MapRGB(screen->format, 64,64,64));
 
-    // Probably call SDL_FillRect or SDL_BlitSurface a bunch here :-)
-    
+    // Loading correct image based on block spawned
+	switch (model->shape) {
+		case I:
+			blockIMG = load("assets/I.png");
+			break;
+		case O:
+		blockIMG = load("assets/O.png");
+			break;
+		case T:
+			blockIMG = load("assets/T.png");
+			break;
+		case S:
+			blockIMG = load("assets/S.png");
+			break;
+		case Z:
+			blockIMG = load("assets/Z.png");
+			break;
+		case J:
+			blockIMG = load("assets/J.png");
+			break;
+		case L:
+			blockIMG = load("assets/L.png");
+			break;
+	}
+	
     // making four 32 by 32 pixel blocks
     SDL_Rect dest[4];
 	Coordinate * block = model->block();
@@ -149,7 +172,12 @@ void View::show(Model * model) {
 		dest[i].y = 32 + (block[i].y + model->location.y) * 32;
 		SDL_FillRect(screen, &dest[i], SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
 	}
-
+	
+	//SDL_BlitSurface calls for block images
+	for (int x = 0; x < 4; x++) {
+		SDL_BlitSurface(blockIMG, NULL, screen, &dest[x]);
+	}
+	
     SDL_UpdateWindowSurface(window);
    
 }
