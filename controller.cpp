@@ -42,7 +42,6 @@ void Controller::loop() {
             case SDL_KEYDOWN:
                 switch(e.key.keysym.sym) {
                 case SDLK_UP:
-                        break;
                 case SDLK_DOWN:
                 case SDLK_LEFT:
                 case SDLK_RIGHT:
