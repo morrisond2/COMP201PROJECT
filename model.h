@@ -37,7 +37,7 @@ public:
     void fall();
     // Go left or right
     void go(Direction d);
-    // the grid of blocks
+    // the grid of true/false (for collision detection)
     bool grid[21][10];
     // make Tetrominoe
     void spawn();

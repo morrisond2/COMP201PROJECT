@@ -80,23 +80,45 @@ Coordinate * Model::block() {
 		{ {0, 1}, {0, 0}, {1, 0}, {2, 0} }, // J
 		{ {0, 0}, {1, 0}, {2, 0}, {2, 1} },
 	},
-};
-
+    };
     // Building blocks for Tetrominoes
 	return blocks[orientation][shape];
 }
 
 // This should build up the pile structure (and do collision detection)
 void Model::build() {
+    
+    Coordinate * blck = block();
+    for (int i =  0; i < 4; i++) {
+        grid[blck[i].y+location.y][blck[i].x+location.x] = true;
+        // also make a pile structure on the screen here of course
+        
+    }
+    
+    /*
+    for (int i=0; i<=height; i++) {
+        for (int j=0; j<width; j++) {
+            cout << grid[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    */
+    
+    spawn();
 }
 
 void Model::fall() {
-	if (location.y < 20) {
-		location.y++;
-		cout << location.y << endl;
-	} else {
-        build();
-	}
+    Coordinate * blck = block();
+    
+    for (int i = 0; i < 4; i++) {
+        if (grid[blck[i].y+location.y + 1][blck[i].x+location.x]) {
+            // yay collision
+            build();
+            return;
+        }
+    }
+    location.y++;
 }
 
 int Model::right() {
