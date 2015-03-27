@@ -10,17 +10,11 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
-    // Seed random number generator with time
-    srand(time(0));
-    randomNum = rand()%7;
-    //cout << randomNum << endl;
-    piece = Tetrominoe(randomNum);
+    piece = (Tetrominoe)(time(0)%7);
     //pieces.push_back(piece);
     this->spawn(piece);
     // making a boolean grid to check where blocks are
-    grid = new bool*[height+1];
-    for (int i=0; i <= height; i++) {
-        grid[i] = new bool[width];
+    for (int i=0; i<=height; i++) {
         for (int j=0; j<width; j++) {
             if (i==height) {
                 grid[i][j] = true;
@@ -32,10 +26,6 @@ Model::Model(int h, int w) {
 }
 // Destructor deletes dynamically allocated memory
 Model::~Model() {
-    for (int i = 0; i < height; i++) {
-        delete grid[i];
-    }
-    delete grid;
 }
 
 bool Model::gameOver() {
@@ -43,8 +33,7 @@ bool Model::gameOver() {
 }
 
 void Model::randomPiece() {
-    randomNum = rand()%7;
-    piece = Tetrominoe(randomNum);
+    piece = (Tetrominoe)(time(0)%7);
     //pieces.push_back(piece);
     this->spawn(piece);
 }
@@ -70,6 +59,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case T:
             block1.x = 7;
             block2.x = 6;
@@ -79,6 +69,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y+1;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case S:
             block1.x = 7;
             block2.x = 8;
@@ -88,6 +79,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case Z:
             block1.x = 6;
             block2.x = 7;
@@ -97,6 +89,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case J:
             block1.x = 6;
             block2.x = 6;
@@ -106,6 +99,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y+1;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         case L:
             block1.x = 8;
             block2.x = 6;
@@ -115,6 +109,7 @@ void Model::spawn(Tetrominoe shape) {
             block2.y = block1.y+1;
             block3.y = block1.y+1;
             block4.y = block1.y+1;
+            break;
         default:
             break;
     }
@@ -164,13 +159,24 @@ void Model::fall() {
     if (block1.y >= 20) {
         block1.y = 20;
         build(piece);
+
+    if (grid[block1.x][block1.y]) {
+        // adjust boolean grid here
+        
+    } else {
+        block1.y++;
+        block2.y++;
+        block3.y++;
+        block4.y++;
+    }
     }
 }
 
 void Model::go(Direction d) {
     if (d == LEFT) {
         if (block1.x == 0 || block2.x == 0 || block3.x == 0 || block4.x == 0) {
-        } else {
+        }
+        else {
             block1.x--;
             block2.x--;
             block3.x--;
@@ -178,7 +184,9 @@ void Model::go(Direction d) {
         }
     }
     if (d == RIGHT) {
-        if (block1.x == width-1 || block2.x == width-1 || block3.x == width-1|| block4.x == width-1) {
+
+        if (block1.x == width-1 || block2.x == width-1 || block3.x == width-1 || block4.x == width-1) {
+
         } else {
             block1.x++;
             block2.x++;
@@ -186,4 +194,14 @@ void Model::go(Direction d) {
             block4.x++;
         }
     }
+    if (d == DOWN) {
+        if (block1.y >= 19 || block2.y >= 19 || block3.y >= 19 || block4.y >= 19) {
+        } else {
+            block1.y++;
+            block2.y++;
+            block3.y++;
+            block4.y++;
+        }
+    }
 }
+

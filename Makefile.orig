@@ -3,7 +3,11 @@ UNAME=$(shell uname -s)
 CFLAGS=-c -g -Wall -Dmain=SDL_main
 # Mac OS X Users: Remove -lmingw32 and remove  -w -Wl,-subsystem,windows (DONE)
 ifeq ($(UNAME),Darwin)
+<<<<<<< HEAD
+LDFLAGS=-I/usr/local/include/SDL2 -L/usr/local/lib  -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
+=======
 LDFLAGS=-I/usr/local/include/SDL2 -L/usr/local/lib -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
+>>>>>>> 52a8409686b8fe04002df447daa13feac3a95715
 else
 LDFLAGS=-I/usr/local/include/SDL2 -L/usr/local/lib -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 endif
