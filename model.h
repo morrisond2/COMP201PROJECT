@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum Direction { UP, DOWN, LEFT, RIGHT };
+enum Direction { UP, LEFT, DOWN, RIGHT };
 
 enum Tetrominoe {
     // see http://tetris.wikia.com/wiki/Tetromino for the names
