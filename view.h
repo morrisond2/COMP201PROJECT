@@ -38,5 +38,6 @@ private:
 //    SDL_Surface* text;
 //    Mix_Chunk * food;
     TTF_Font * font;
+	SDL_Surface* blockIMG = NULL;
 };
 #endif

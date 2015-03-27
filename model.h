@@ -46,10 +46,10 @@ public:
 	// Get the current block
 	Coordinate * block();
 	int right();
+	Tetrominoe shape;
 private:
     int height, width;
     bool ended;
-    Tetrominoe shape;
     Direction orientation;
 };
 
