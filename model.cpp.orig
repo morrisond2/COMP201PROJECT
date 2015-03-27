@@ -91,6 +91,26 @@ void Model::build() {
 }
 
 void Model::fall() {
+<<<<<<< HEAD
+    block1.y++;
+    block2.y++;
+    block3.y++;
+    block4.y++;
+    if (block1.y >= 20) {
+        block1.y = 20;
+        build(piece);
+
+    if (grid[block1.x][block1.y]) {
+        // adjust boolean grid here
+        
+    } else {
+        block1.y++;
+        block2.y++;
+        block3.y++;
+        block4.y++;
+    }
+    }
+=======
 	if (location.y < 20) {
 		location.y++;
 		cout << location.y << endl;
@@ -108,10 +128,31 @@ int Model::right() {
 		}
 	}
 	return result;
+>>>>>>> 0165d905a1e05e0bed15941f1bde331e1f67ceb2
 }
 
 void Model::go(Direction d) {
     if (d == LEFT) {
+<<<<<<< HEAD
+        if (block1.x == 0 || block2.x == 0 || block3.x == 0 || block4.x == 0) {
+        }
+        else {
+            block1.x--;
+            block2.x--;
+            block3.x--;
+            block4.x--;
+        }
+    }
+    if (d == RIGHT) {
+
+        if (block1.x == width-1 || block2.x == width-1 || block3.x == width-1 || block4.x == width-1) {
+
+        } else {
+            block1.x++;
+            block2.x++;
+            block3.x++;
+            block4.x++;
+=======
         if (location.x > 0) {
             location.x--;
         }
@@ -119,12 +160,18 @@ void Model::go(Direction d) {
     if (d == RIGHT) {
         if (right() < 9) {
             location.x++;
+>>>>>>> 0165d905a1e05e0bed15941f1bde331e1f67ceb2
         }
     }
     if (d == DOWN) {
 		fall();
     }
+<<<<<<< HEAD
+}
+
+=======
 	if (d == UP) {
 		orientation = (Direction)((((int)orientation) + 1) % 4);
 	}
 }
+>>>>>>> 0165d905a1e05e0bed15941f1bde331e1f67ceb2
