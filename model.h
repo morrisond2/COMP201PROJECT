@@ -9,7 +9,9 @@ enum Direction { UP, LEFT, DOWN, RIGHT };
 
 enum Tetrominoe {
     // see http://tetris.wikia.com/wiki/Tetromino for the names
-    I, O, T, S, Z, J, L
+    I, O, T, S, Z, J, L, D
+    // the D is not a Tetrominoe shape,
+    // it's used for a default in the colorGrid
 };
 
 typedef struct {
@@ -39,6 +41,8 @@ public:
     void go(Direction d);
     // the grid of true/false (for collision detection)
     bool grid[21][10];
+    // visible grid
+    Tetrominoe colorGrid[20][10];
     // make Tetrominoe
     void spawn();
     // Build up the pile

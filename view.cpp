@@ -72,6 +72,7 @@ SDL_Surface* View::load(char * path) {
 
 
 void View::show(Model * model) {
+    // the three nice rectangles Mario made:
     SDL_Rect one;
     one.x=74;
     one.y=98;
@@ -103,6 +104,7 @@ void View::show(Model * model) {
     threet.w=200;
     threet.h=400;
     
+    // the thin vertical lines in the Tetris grid:
     int d=352;
     SDL_Rect bottom[10];
     for (int i=0;i<10;i++)
@@ -115,6 +117,7 @@ void View::show(Model * model) {
         
     }
     
+    // the thin horizontal lines in the Tetris grid:
     int b=32;
     SDL_Rect side[22];
     for(int i = 0; i < 22; i++)
@@ -126,8 +129,9 @@ void View::show(Model * model) {
         b=b+32;
     }
     
+    // black background screen
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
-   
+    // rest of the background rectangle stuff
     SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &two, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 0,0,255));
@@ -143,7 +147,7 @@ void View::show(Model * model) {
 			blockIMG = load("assets/I.png");
 			break;
 		case O:
-		blockIMG = load("assets/O.png");
+            blockIMG = load("assets/O.png");
 			break;
 		case T:
 			blockIMG = load("assets/T.png");
@@ -160,6 +164,10 @@ void View::show(Model * model) {
 		case L:
 			blockIMG = load("assets/L.png");
 			break;
+        case D:
+            break;
+        default:
+            break;
 	}
 	
     // making four 32 by 32 pixel blocks
@@ -178,6 +186,60 @@ void View::show(Model * model) {
 		SDL_BlitSurface(blockIMG, NULL, screen, &dest[x]);
 	}
 	
+    
+    for (int i=0; i<20; i++) {
+        for (int j=0; j<10; j++) {
+            switch (model->colorGrid[i][j]) {
+                case I:
+                    blockIMG = load("assets/I.png");
+                    break;
+                case O:
+                    blockIMG = load("assets/O.png");
+                    break;
+                case T:
+                    blockIMG = load("assets/T.png");
+                    break;
+                case S:
+                    blockIMG = load("assets/S.png");
+                    break;
+                case Z:
+                    blockIMG = load("assets/Z.png");
+                    break;
+                case J:
+                    blockIMG = load("assets/J.png");
+                    break;
+                case L:
+                    blockIMG = load("assets/L.png");
+                    break;
+                case D:
+                    break;
+                default:
+                    break;
+            }
+            switch (model->colorGrid[i][j]) {
+                case I:
+                case O:
+                case T:
+                case S:
+                case Z:
+                case J:
+                case L:
+                    SDL_Rect dest;
+                    dest.w = 32;
+                    dest.h = 32;
+                    dest.x = 352 + j*32;
+                    dest.y = 32 + i*32;
+                    SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+                    SDL_BlitSurface(blockIMG, NULL, screen, &dest);
+                    break;
+                case D:
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+    }
+    
     SDL_UpdateWindowSurface(window);
-   
 }

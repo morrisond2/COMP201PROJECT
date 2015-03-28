@@ -18,6 +18,7 @@ Model::Model(int h, int w) {
                 grid[i][j] = true;
             } else {
                 grid[i][j] = false;
+                colorGrid[i][j] = D;
             }
         }
     }
@@ -28,6 +29,11 @@ Model::~Model() {
 }
 
 bool Model::gameOver() {
+    for (int j=0; j<10; j++) {
+        if (grid[0][j]) {
+            return true;
+        }
+    }
     return false;
 }
 
@@ -35,7 +41,7 @@ void Model::spawn() {
 // Create a new piece
     shape = (Tetrominoe)(time(0)%7);
 	orientation = UP;
-	location.x = 5;
+	location.x = 4;
 	location.y = 0;
 }
 
@@ -96,7 +102,7 @@ void Model::build() {
     for (int i =  0; i < 4; i++) {
         grid[blck[i].y+location.y][blck[i].x+location.x] = true;
         // also make a pile structure on the screen here of course
-        
+        colorGrid[blck[i].y+location.y][blck[i].x+location.x] = shape;
     }
     
     /*
@@ -149,6 +155,7 @@ void Model::go(Direction d) {
     }
     if (d == DOWN) {
 		fall();
+        fall();
     }
 	if (d == UP) {
 		orientation = (Direction)((((int)orientation) + 1) % 4);
