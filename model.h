@@ -19,8 +19,6 @@ typedef struct {
     int y;
 } Coordinate;
 
-
-
 // The model manages the state of the game
 class Model {
 public:
@@ -28,29 +26,38 @@ public:
     Model(int h, int w);
     // Destructor deletes all dynamically allocated stuff
     ~Model();
+    // Methods:
     // Is the game over?
     bool gameOver();
-    
-    // TODO: Put your stuff here
-
-	// Where is the falling block?
-	Coordinate location;
     // Let blocks fall
     void fall();
     // Go left or right
     void go(Direction d);
-    // the grid of true/false (for collision detection)
-    bool grid[21][10];
-    // visible grid
-    Tetrominoe colorGrid[20][10];
     // make Tetrominoe
     void spawn();
     // Build up the pile
     void build();
 	// Get the current block
 	Coordinate * block();
-	int right();
+    // get the most right block of the falling Tetrominoe
+	Coordinate right();
+    // get the most left block of the falling Tetrominoe
+    Coordinate left();
+    // checks if any row is complete
+    int checkRows();
+    // if so, delete it and move everything down
+    void deleteRow(int row);
+    // Variables:
+    // the current shape
 	Tetrominoe shape;
+    // Where is the falling shape?
+    Coordinate location;
+    // where is a particular block
+    Coordinate blockLocation;
+    // the grid of true/false (for collision detection)
+    bool grid[21][10];
+    // visible grid
+    Tetrominoe colorGrid[20][10];
 private:
     int height, width;
     bool ended;
