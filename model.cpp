@@ -40,7 +40,7 @@ bool Model::gameOver() {
     return false;
 }
 
-int Model::checkRows() {
+void Model::checkRows() {
     bool complete=true;
     for (int i = 0; i<height; i++) {
         for (int j=0; j<width; j++) {
@@ -50,31 +50,31 @@ int Model::checkRows() {
             }
         }
         if (!complete) {
-            continue;
+            complete = true;
+        } else {
+            deleteRow(i);
         }
-        return i;
     }
-    return -1;
 }
 
 void Model::deleteRow(int row) {
-    if (row == -1) {
-        return;
-    }
-    
     for (int j=0; j<width; j++) {
         colorGrid[row][j] = D;
     }
-    
-    // do more stuff
-    
+    for (int i=row; i>=1; i--) {
+        for (int j=0; j<width; j++) {
+            colorGrid[i][j] = colorGrid[i-1][j];
+            grid[i][j] = grid[i-1][j];
+        }
+    }
+    for (int j=0; j<width; j++) {
+        colorGrid[0][j] = D;
+        grid[0][j] = false;
+    }
 }
 
-
-
-
 void Model::spawn() {
-// Create a new piece
+    // Create a new piece
     shape = (Tetrominoe)(time(0)%7);
 	orientation = UP;
 	location.x = 4;
@@ -131,19 +131,19 @@ Coordinate * Model::block() {
 	return blocks[orientation][shape];
 }
 
-// This should build up the pile structure (and do collision detection)
+// This should build up the pile structure
 void Model::build() {
     Coordinate * blck = block();
     for (int i =  0; i < 4; i++) {
         grid[blck[i].y+location.y][blck[i].x+location.x] = true;
         colorGrid[blck[i].y+location.y][blck[i].x+location.x] = shape;
     }
+    checkRows();
     spawn();
 }
 
-void Model::fall() {
+void Model::fall() { // (and do collision detection)
     Coordinate * blck = block();
-    
     for (int i = 0; i < 4; i++) {
         if (grid[blck[i].y+location.y + 1][blck[i].x+location.x]) {
             // yay collision

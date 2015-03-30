@@ -44,7 +44,7 @@ public:
     // get the most left block of the falling Tetrominoe
     Coordinate left();
     // checks if any row is complete
-    int checkRows();
+    void checkRows();
     // if so, delete it and move everything down
     void deleteRow(int row);
     // Variables:
