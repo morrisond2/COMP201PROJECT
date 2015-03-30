@@ -126,6 +126,9 @@ void View::show(Model * model) {
         b=b+32;
     }
     
+    BG = load("assets/TetrisBackground.jpeg")
+    
+    
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
    
     SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 0,0,255));
@@ -143,7 +146,7 @@ void View::show(Model * model) {
 			blockIMG = load("assets/I.png");
 			break;
 		case O:
-		blockIMG = load("assets/O.png");
+		    blockIMG = load("assets/O.png");
 			break;
 		case T:
 			blockIMG = load("assets/T.png");
