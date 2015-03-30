@@ -195,5 +195,13 @@ void Model::go(Direction d) {
     }
 	if (d == UP) {
 		orientation = (Direction)((((int)orientation) + 1) % 4);
+		Coordinate l = left();
+		if (l.x < 0) {
+			location.x -= l.x;
+		}
+		Coordinate r = right();
+		if (r.x > 9) {
+			location.x -= (r.x - 9);
+		}
 	}
 }
