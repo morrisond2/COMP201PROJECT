@@ -212,6 +212,25 @@ void Model::go(Direction d) {
         fall();
     }
 	if (d == UP) {
+		for (int i=0; i<4; i++) {
+            if (grid[blck[i].y+location.y][blck[i].x+location.x-1]) {
+                return;
+            }
+		}
+		 for (int i = 0; i < 4; i++) {
+			if (grid[blck[i].y+location.y + 1][blck[i].x+location.x]) { 
+				return;
+        }
+    }
+	
 		orientation = (Direction)((((int)orientation) + 1) % 4);
+		Coordinate l = left();
+		if (l.x < 0) {
+			location.x -= l.x;
+		}
+		Coordinate r = right();
+		if (r.x > 9) {
+			location.x -= (r.x - 9);
+		}
 	}
 }
