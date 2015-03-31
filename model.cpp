@@ -10,6 +10,7 @@ Model::Model(int h, int w) {
     height = h;
     width = w;
     score = 0;
+    dontmove = false;
     shape = (Tetrominoe)(time(0)%7);
     // for later checks
     blockLocation.x=0;
@@ -75,7 +76,10 @@ void Model::deleteRow(int row) {
 }
 
 void Model::spawn() {
-    // Create a new piece
+    if (gameOver()) {
+        return;
+    }
+     // Create a new piece
     shape = (Tetrominoe)(time(0)%7);
 	orientation = UP;
 	location.x = 4;
@@ -180,12 +184,23 @@ Coordinate Model::left() {
 }
 
 void Model::go(Direction d) {
+    Coordinate * blck = block();
     if (d == LEFT) {
-        if (left().x > 0 && !grid[blockLocation.y][blockLocation.x]) {
+        for (int i=0; i<4; i++) {
+            if (grid[blck[i].y+location.y][blck[i].x+location.x-1]) {
+                return;
+            }
+        }
+        if (left().x > 0) {
             location.x--;
         }
     }
     if (d == RIGHT) {
+        for (int i=0; i<4; i++) {
+            if (grid[blck[i].y+location.y][blck[i].x+location.x+1]) {
+                return;
+            }
+        }
         if (right().x < 9) {
             location.x++;
         }

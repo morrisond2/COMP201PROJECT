@@ -67,6 +67,8 @@ private:
     bool ended;
     // up down left or right
     Direction orientation;
+    // left right issue
+    bool dontmove;
 };
 
 #endif
