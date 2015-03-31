@@ -217,6 +217,11 @@ void Model::go(Direction d) {
                 return;
             }
 		}
+		 for (int i = 0; i < 4; i++) {
+			if (grid[blck[i].y+location.y + 1][blck[i].x+location.x]) { 
+				return;
+        }
+    }
 	
 		orientation = (Direction)((((int)orientation) + 1) % 4);
 		Coordinate l = left();
