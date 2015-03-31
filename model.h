@@ -1,7 +1,7 @@
 #ifndef _MODEL_H
 #define _MODEL_H
 
-#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -58,9 +58,14 @@ public:
     bool grid[21][10];
     // visible grid
     Tetrominoe colorGrid[20][10];
+    // how many rows completed
+    int score;
 private:
+    // size of the model
     int height, width;
+    // gameover
     bool ended;
+    // up down left or right
     Direction orientation;
 };
 

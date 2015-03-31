@@ -1,7 +1,6 @@
 #include "model.h"
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 
 using namespace std;
 
@@ -10,6 +9,7 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
+    score = 0;
     shape = (Tetrominoe)(time(0)%7);
     // for later checks
     blockLocation.x=0;
@@ -71,6 +71,7 @@ void Model::deleteRow(int row) {
         colorGrid[0][j] = D;
         grid[0][j] = false;
     }
+    score++;
 }
 
 void Model::spawn() {
