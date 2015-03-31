@@ -1,0 +1,32 @@
+High Scores of Tetris made by Ethan, Derek, Mario and Bram.
+Rows completed: 27	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 1	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 31	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 6	(milli seconds between Tetrominoes: 300)

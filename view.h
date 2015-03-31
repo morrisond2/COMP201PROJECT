@@ -34,10 +34,11 @@ private:
     SDL_Window* window;
     SDL_Surface* screen;
     bool fail;
-    SDL_Surface* load(char * path);
+    SDL_Surface* load(std::string path);
 //    SDL_Surface* text;
 //    Mix_Chunk * food;
     TTF_Font * font;
 	SDL_Surface* blockIMG = NULL;
+    SDL_Surface* BG = NULL;
 };
 #endif

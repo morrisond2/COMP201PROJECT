@@ -1,7 +1,6 @@
 #include "model.h"
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 
 using namespace std;
 
@@ -10,6 +9,7 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
+    score = 0;
     shape = (Tetrominoe)(time(0)%7);
     // for later checks
     blockLocation.x=0;
@@ -40,7 +40,7 @@ bool Model::gameOver() {
     return false;
 }
 
-int Model::checkRows() {
+void Model::checkRows() {
     bool complete=true;
     for (int i = 0; i<height; i++) {
         for (int j=0; j<width; j++) {
@@ -50,31 +50,32 @@ int Model::checkRows() {
             }
         }
         if (!complete) {
-            continue;
+            complete = true;
+        } else {
+            deleteRow(i);
         }
-        return i;
     }
-    return -1;
 }
 
 void Model::deleteRow(int row) {
-    if (row == -1) {
-        return;
-    }
-    
     for (int j=0; j<width; j++) {
         colorGrid[row][j] = D;
     }
-    
-    // do more stuff
-    
+    for (int i=row; i>=1; i--) {
+        for (int j=0; j<width; j++) {
+            colorGrid[i][j] = colorGrid[i-1][j];
+            grid[i][j] = grid[i-1][j];
+        }
+    }
+    for (int j=0; j<width; j++) {
+        colorGrid[0][j] = D;
+        grid[0][j] = false;
+    }
+    score++;
 }
 
-
-
-
 void Model::spawn() {
-// Create a new piece
+    // Create a new piece
     shape = (Tetrominoe)(time(0)%7);
 	orientation = UP;
 	location.x = 4;
@@ -131,19 +132,19 @@ Coordinate * Model::block() {
 	return blocks[orientation][shape];
 }
 
-// This should build up the pile structure (and do collision detection)
+// This should build up the pile structure
 void Model::build() {
     Coordinate * blck = block();
     for (int i =  0; i < 4; i++) {
         grid[blck[i].y+location.y][blck[i].x+location.x] = true;
         colorGrid[blck[i].y+location.y][blck[i].x+location.x] = shape;
     }
+    checkRows();
     spawn();
 }
 
-void Model::fall() {
+void Model::fall() { // (and do collision detection)
     Coordinate * blck = block();
-    
     for (int i = 0; i < 4; i++) {
         if (grid[blck[i].y+location.y + 1][blck[i].x+location.x]) {
             // yay collision
@@ -158,7 +159,7 @@ Coordinate Model::right() {
     blockLocation.x = 0;
 	Coordinate * blck = block();
 	for (int i =  0; i < 4; i++) {
-		if (blck[i].x + location.x != true) {
+		if (blck[i].x + location.x > blockLocation.x) {
 			blockLocation.x = (blck[i].x + location.x);
             blockLocation.y = (blck[i].y + location.y);
 		}
@@ -179,16 +180,27 @@ Coordinate Model::left() {
 }
 
 void Model::go(Direction d) {
+    Coordinate * blck = block();
     if (d == LEFT) {
-        if (left().x > 0 && !grid[blockLocation.y][blockLocation.x]) {
+        for (int i = 0; i < 4; i++){
+            if (grid[blck[i].y + location.y][blck[i].x+location.x-1]==true)
+            {return;}
+        }
+        if (left().x > 0) {
             location.x--;
         }
     }
+    
     if (d == RIGHT) {
+        for (int i = 0; i < 4; i++) {
+            if (grid[blck[i].y + location.y][blck[i].x+location.x+1] == true) {return;
+        }
+        }
         if (right().x < 9) {
             location.x++;
         }
     }
+
     if (d == DOWN) {
 		fall();
         fall();

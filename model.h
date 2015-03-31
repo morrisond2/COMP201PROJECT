@@ -1,7 +1,7 @@
 #ifndef _MODEL_H
 #define _MODEL_H
 
-#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -44,7 +44,7 @@ public:
     // get the most left block of the falling Tetrominoe
     Coordinate left();
     // checks if any row is complete
-    int checkRows();
+    void checkRows();
     // if so, delete it and move everything down
     void deleteRow(int row);
     // Variables:
@@ -58,9 +58,14 @@ public:
     bool grid[21][10];
     // visible grid
     Tetrominoe colorGrid[20][10];
+    // how many rows completed
+    int score;
 private:
+    // size of the model
     int height, width;
+    // gameover
     bool ended;
+    // up down left or right
     Direction orientation;
 };
 

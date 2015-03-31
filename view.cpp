@@ -54,10 +54,10 @@ View::~View() {
 /**
  *  Load an image from a file to a SDL_Surface
  */
-SDL_Surface* View::load(char * path) {
+SDL_Surface* View::load(string path) {
     // Load image
     SDL_Surface* optimizedSurface = NULL;
-    SDL_Surface* loadedSurface = IMG_Load( path );
+    SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
     if( loadedSurface == NULL ) {
         return NULL;
     }
@@ -82,7 +82,7 @@ void View::show(Model * model) {
     two.x=350;
     two.y=30;
     two.w=324;
-    two.h=708;
+    two.h=708-64;
     SDL_Rect three;
     three.x=746;
     three.y=98;
@@ -97,7 +97,7 @@ void View::show(Model * model) {
     twot.x=352;
     twot.y=32;
     twot.w=320;
-    twot.h=704;
+    twot.h=704-64;
     SDL_Rect threet;
     threet.x=748;
     threet.y=100;
@@ -112,15 +112,15 @@ void View::show(Model * model) {
         bottom[i].x=d+32;
         bottom[i].y=32;
         bottom[i].w=1;
-        bottom[i].h=704;
+        bottom[i].h=704-64;
         d=d+32;
         
     }
     
     // the thin horizontal lines in the Tetris grid:
     int b=32;
-    SDL_Rect side[22];
-    for(int i = 0; i < 22; i++)
+    SDL_Rect side[20];
+    for(int i = 0; i < 20; i++)
     {
         side[i].x=352;
         side[i].y=b+32;
@@ -131,12 +131,16 @@ void View::show(Model * model) {
     
     // black background screen
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
+    BG = load("assets/TetrisBackground.jpeg");
+    SDL_BlitSurface(BG,NULL,screen, NULL);
+    
     // rest of the background rectangle stuff
     SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &two, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &onet, SDL_MapRGB(screen->format, 0,0,0));
     SDL_FillRect(screen, &twot, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_BlitSurface(BG, NULL, NULL, &twot);
     SDL_FillRect(screen, &threet, SDL_MapRGB(screen->format, 0,0,0));
     SDL_FillRects(screen, bottom, 10, SDL_MapRGB(screen->format, 64,64,64));
     SDL_FillRects(screen, side, 22, SDL_MapRGB(screen->format, 64,64,64));
