@@ -6,11 +6,20 @@ using namespace std;
 Controller::Controller() {
     model = new Model(20,10);
     view = new View("Tetris", 1024, 768);
+    scoresfile.open("highscores.txt", ios::app);
+    fileFailedOpen = false;
+    if (scoresfile.fail()) {
+        cout << "Outputfile failed to open." << endl;
+        fileFailedOpen = true;
+    }
+    // Decrease the update time interval to make game faster
+    milliSeconds = 300;
 }
 
 Controller::~Controller() {
     delete model;
     delete view;
+    scoresfile.close();
 }
 /*
 References:
@@ -30,8 +39,7 @@ void Controller::loop() {
         currentTime = SDL_GetTicks();
         // Do stuff here to animate as necessary
         view->show(model);
-        // Decrease the update time interval to make game faster
-        if (currentTime > lastTime + 350) {
+        if (currentTime > lastTime + milliSeconds) {
             model->fall();
             lastTime = currentTime;
         }
@@ -56,6 +64,10 @@ void Controller::loop() {
         }
     }
     // TODO: show something nice?
+    if (!fileFailedOpen) {
+        scoresfile << endl << "Rows completed: " << model->score << "\t"
+        << "(milli seconds between Tetrominoes: " << milliSeconds << ")" << endl;
+    }
     view->show(model);
     SDL_Delay(1000);
 }
