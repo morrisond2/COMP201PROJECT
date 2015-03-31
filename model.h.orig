@@ -1,7 +1,7 @@
 #ifndef _MODEL_H
 #define _MODEL_H
 
-#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -39,12 +39,16 @@ public:
     void build();
 	// Get the current block
 	Coordinate * block();
+<<<<<<< HEAD
+	int right();
+	Tetrominoe shape;
+=======
     // get the most right block of the falling Tetrominoe
 	Coordinate right();
     // get the most left block of the falling Tetrominoe
     Coordinate left();
     // checks if any row is complete
-    void checkRows();
+    int checkRows();
     // if so, delete it and move everything down
     void deleteRow(int row);
     // Variables:
@@ -58,17 +62,11 @@ public:
     bool grid[21][10];
     // visible grid
     Tetrominoe colorGrid[20][10];
-    // how many rows completed
-    int score;
+>>>>>>> 3863861986f4c0fd5c845699e61223bdfb633ffd
 private:
-    // size of the model
     int height, width;
-    // gameover
     bool ended;
-    // up down left or right
     Direction orientation;
-    // left right issue
-    bool dontmove;
 };
 
 #endif

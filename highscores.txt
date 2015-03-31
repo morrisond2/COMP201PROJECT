@@ -7,9 +7,21 @@ Rows completed: 1	(milli seconds between Tetrominoes: 300)
 
 Rows completed: 31	(milli seconds between Tetrominoes: 300)
 
+<<<<<<< HEAD
 Rows completed: 5	(milli seconds between Tetrominoes: 300)
 
 Rows completed: 36	(milli seconds between Tetrominoes: 300)
+=======
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+>>>>>>> 465eddd4e7ce895464b03da0fb3a1abfb0a91b83
 
 Rows completed: 0	(milli seconds between Tetrominoes: 300)
 
@@ -20,5 +32,13 @@ Rows completed: 0	(milli seconds between Tetrominoes: 300)
 Rows completed: 0	(milli seconds between Tetrominoes: 300)
 
 Rows completed: 0	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 300)
+<<<<<<< HEAD
+=======
+
+Rows completed: 6	(milli seconds between Tetrominoes: 300)
+
+>>>>>>> 465eddd4e7ce895464b03da0fb3a1abfb0a91b83
 
 Rows completed: 0	(milli seconds between Tetrominoes: 300)
