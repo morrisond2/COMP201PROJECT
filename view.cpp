@@ -110,7 +110,7 @@ void View::showPause(Model * model) {
     three.x=746;
     three.y=98;
     three.w=204;
-    three.h=404;
+    three.h=154;
     SDL_Rect onet;
     onet.x=76;
     onet.y=100;
@@ -120,7 +120,7 @@ void View::showPause(Model * model) {
     threet.x=748;
     threet.y=100;
     threet.w=200;
-    threet.h=400;
+    threet.h=150;
     
     SDL_Rect thinhorizontaltop;
     thinhorizontaltop.x = 350;
@@ -152,7 +152,6 @@ void View::showPause(Model * model) {
     
     // black background screen
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
-    BG = load("assets/TetrisBackground.jpeg");
     SDL_BlitSurface(BG,NULL,screen, NULL);
     
     // rest of the background rectangle stuff
@@ -194,7 +193,7 @@ void View::show(Model * model) {
     three.x=746;
     three.y=98;
     three.w=204;
-    three.h=404;
+    three.h=154;
     SDL_Rect onet;
     onet.x=76;
     onet.y=100;
@@ -204,7 +203,7 @@ void View::show(Model * model) {
     threet.x=748;
     threet.y=100;
     threet.w=200;
-    threet.h=400;
+    threet.h=150;
     
     SDL_Rect thinhorizontaltop;
     thinhorizontaltop.x = 350;
