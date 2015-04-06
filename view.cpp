@@ -1,3 +1,6 @@
+
+// Tetris game
+
 #include "view.h"
 
 using namespace std;
@@ -42,7 +45,15 @@ View::View(string title, int width, int height) {
     }
 //    food = Mix_LoadWAV("assets/yummy.wav");
     font = TTF_OpenFont( "assets/LiberationSans-Regular.ttf", 28 );
-
+    
+    BG = load("assets/TetrisBackground.jpeg");
+    IblockIMG = load("assets/I.png");
+    OblockIMG = load("assets/O.png");
+    TblockIMG = load("assets/T.png");
+    SblockIMG = load("assets/S.png");
+    ZblockIMG = load("assets/Z.png");
+    JblockIMG = load("assets/J.png");
+    LblockIMG = load("assets/L.png");
 }
 
 View::~View() {
@@ -52,6 +63,15 @@ View::~View() {
     TTF_CloseFont( font );
     TTF_Quit();
     SDL_FreeSurface(text);
+    
+    SDL_FreeSurface(BG);
+    SDL_FreeSurface(IblockIMG);
+    SDL_FreeSurface(OblockIMG);
+    SDL_FreeSurface(TblockIMG);
+    SDL_FreeSurface(SblockIMG);
+    SDL_FreeSurface(ZblockIMG);
+    SDL_FreeSurface(JblockIMG);
+    SDL_FreeSurface(LblockIMG);
 }
 
 /**
@@ -235,7 +255,6 @@ void View::show(Model * model) {
     
     // black background screen
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
-    BG = load("assets/TetrisBackground.jpeg");
     SDL_BlitSurface(BG,NULL,screen, NULL);
     
     // rest of the background rectangle stuff
@@ -250,28 +269,28 @@ void View::show(Model * model) {
     SDL_FillRects(screen, bottom, 9, SDL_MapRGB(screen->format, 64,64,64));
     SDL_FillRects(screen, side, 20, SDL_MapRGB(screen->format, 64,64,64));
 
-    // Loading correct image based on block spawned
+    // Choosing correct image based on block spawned
 	switch (model->shape) {
 		case I:
-			blockIMG = load("assets/I.png");
+            blockIMG = IblockIMG;
 			break;
 		case O:
-            blockIMG = load("assets/O.png");
+            blockIMG = OblockIMG;
 			break;
 		case T:
-			blockIMG = load("assets/T.png");
+            blockIMG = TblockIMG;
 			break;
 		case S:
-			blockIMG = load("assets/S.png");
+            blockIMG = SblockIMG;
 			break;
 		case Z:
-			blockIMG = load("assets/Z.png");
+            blockIMG = ZblockIMG;
 			break;
 		case J:
-			blockIMG = load("assets/J.png");
+            blockIMG = JblockIMG;
 			break;
 		case L:
-			blockIMG = load("assets/L.png");
+            blockIMG = LblockIMG;
 			break;
         case D:
             break;
@@ -300,25 +319,25 @@ void View::show(Model * model) {
         for (int j=0; j<10; j++) {
             switch (model->colorGrid[i][j]) {
                 case I:
-                    blockIMG = load("assets/I.png");
+                    blockIMG = IblockIMG;
                     break;
                 case O:
-                    blockIMG = load("assets/O.png");
+                    blockIMG = OblockIMG;
                     break;
                 case T:
-                    blockIMG = load("assets/T.png");
+                    blockIMG = TblockIMG;
                     break;
                 case S:
-                    blockIMG = load("assets/S.png");
+                    blockIMG = SblockIMG;
                     break;
                 case Z:
-                    blockIMG = load("assets/Z.png");
+                    blockIMG = ZblockIMG;
                     break;
                 case J:
-                    blockIMG = load("assets/J.png");
+                    blockIMG = JblockIMG;
                     break;
                 case L:
-                    blockIMG = load("assets/L.png");
+                    blockIMG = LblockIMG;
                     break;
                 case D:
                     break;

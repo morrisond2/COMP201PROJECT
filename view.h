@@ -1,4 +1,6 @@
 
+// Tetris game
+
 #define SDL_MAIN_HANDLED
 
 #ifdef __APPLE__
@@ -39,8 +41,15 @@ private:
     bool fail;
     SDL_Surface* load(std::string path);
     TTF_Font * font;
-	SDL_Surface* blockIMG = NULL;
     SDL_Surface* BG = NULL;
 //    Mix_Chunk * food;
+    SDL_Surface* blockIMG = NULL;
+    SDL_Surface* IblockIMG = NULL;
+    SDL_Surface* OblockIMG = NULL;
+    SDL_Surface* TblockIMG = NULL;
+    SDL_Surface* SblockIMG = NULL;
+    SDL_Surface* ZblockIMG = NULL;
+    SDL_Surface* JblockIMG = NULL;
+    SDL_Surface* LblockIMG = NULL;
 };
 #endif
