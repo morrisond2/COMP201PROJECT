@@ -14,7 +14,7 @@ Controller::Controller() {
         fileFailedOpen = true;
     }
     // Decrease the update time interval to make game faster
-    milliSeconds = 300;
+    milliSeconds = 200;
 }
 
 Controller::~Controller() {
