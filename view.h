@@ -38,6 +38,7 @@ private:
     SDL_Window* window;
     SDL_Surface* screen;
     SDL_Surface* text;
+    SDL_Surface* text2;
     bool fail;
     SDL_Surface* load(std::string path);
     TTF_Font * font;

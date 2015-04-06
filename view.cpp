@@ -179,6 +179,13 @@ void View::showPause(Model * model) {
     textDest.x = 352+110;
     textDest.y = 32+300;
     SDL_BlitSurface( text, NULL, screen, &textDest );
+    
+    SDL_Color textColor2 = { 255, 255, 255 };
+    text2 = TTF_RenderText_Solid( font, "Press P to continue", textColor2 );
+    SDL_Rect textDest2;
+    textDest2.x = 750;
+    textDest2.y = 400;
+    SDL_BlitSurface( text2, NULL, screen, &textDest2 );
    
     SDL_UpdateWindowSurface(window);
 }
@@ -369,6 +376,13 @@ void View::show(Model * model) {
             
         }
     }
+    
+    SDL_Color textColor = { 255, 255, 255 };
+    text = TTF_RenderText_Solid( font, "Press P to pause", textColor );
+    SDL_Rect textDest;
+    textDest.x = 750;
+    textDest.y = 400;
+    SDL_BlitSurface( text, NULL, screen, &textDest );
     
     SDL_UpdateWindowSurface(window);
 }
