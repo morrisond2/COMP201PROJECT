@@ -48,3 +48,9 @@ Rows completed: 0	(milli seconds between Tetrominoes: 300)
 Rows completed: 0	(milli seconds between Tetrominoes: 300)
 
 Rows completed: 24	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 34	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 19	(milli seconds between Tetrominoes: 300)
+
+Rows completed: 17	(milli seconds between Tetrominoes: 300)

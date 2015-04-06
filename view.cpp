@@ -49,6 +49,9 @@ View::~View() {
     SDL_DestroyWindow(window);
     IMG_Quit();
     SDL_Quit();
+    TTF_CloseFont( font );
+    TTF_Quit();
+    SDL_FreeSurface(text);
 }
 
 /**
@@ -63,13 +66,102 @@ SDL_Surface* View::load(string path) {
     }
     // Convert surface to screen format
     optimizedSurface = SDL_ConvertSurface( loadedSurface, screen->format, 0 );
-    
     // Get rid of old loaded surface
     SDL_FreeSurface( loadedSurface );
-    
     return optimizedSurface;
 }
 
+
+void View::showPause(Model * model) {
+    
+    /*
+     
+     THIS IS THE PAUSE SCREEN
+     
+     */
+    
+    // the three nice rectangles Mario made:
+    SDL_Rect one;
+    one.x=74;
+    one.y=98;
+    one.w=204;
+    one.h=154;
+    SDL_Rect three;
+    three.x=746;
+    three.y=98;
+    three.w=204;
+    three.h=404;
+    SDL_Rect onet;
+    onet.x=76;
+    onet.y=100;
+    onet.w=200;
+    onet.h=150;
+    SDL_Rect threet;
+    threet.x=748;
+    threet.y=100;
+    threet.w=200;
+    threet.h=400;
+    
+    SDL_Rect thinhorizontaltop;
+    thinhorizontaltop.x = 350;
+    thinhorizontaltop.y = 30;
+    thinhorizontaltop.w = 324;
+    thinhorizontaltop.h = 2;
+    SDL_Rect thinhorizontalbottom;
+    thinhorizontalbottom.x = 350;
+    thinhorizontalbottom.y = 672;
+    thinhorizontalbottom.w = 324;
+    thinhorizontalbottom.h = 2;
+    SDL_Rect thinvertical1;
+    thinvertical1.x = 350;
+    thinvertical1.y = 32;
+    thinvertical1.h = 640;
+    thinvertical1.w = 2;
+    SDL_Rect thinvertical2;
+    thinvertical2.x = 672;
+    thinvertical2.y = 32;
+    thinvertical2.h = 640;
+    thinvertical2.w = 2;
+    
+    // can't see anything when paused
+    SDL_Rect pauseRectangle;
+    pauseRectangle.x = 352;
+    pauseRectangle.y = 32;
+    pauseRectangle.h = 640;
+    pauseRectangle.w = 320;
+    
+    // black background screen
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
+    BG = load("assets/TetrisBackground.jpeg");
+    SDL_BlitSurface(BG,NULL,screen, NULL);
+    
+    // rest of the background rectangle stuff
+    SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &onet, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_FillRect(screen, &threet, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_FillRect(screen, &thinhorizontaltop, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &thinhorizontalbottom, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &thinvertical1, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &thinvertical2, SDL_MapRGB(screen->format, 0,0,255));
+    
+    /*
+     
+     THIS IS THE PAUSE SCREEN
+     
+     */
+    
+    SDL_FillRect(screen, &pauseRectangle, SDL_MapRGB(screen->format, 255,255,255));
+    
+    SDL_Color textColor = { 0, 255, 255 };
+    text = TTF_RenderText_Solid( font, "Paused", textColor );
+    SDL_Rect textDest;
+    textDest.x = 352+110;
+    textDest.y = 32+300;
+    SDL_BlitSurface( text, NULL, screen, &textDest );
+   
+    SDL_UpdateWindowSurface(window);
+}
 
 void View::show(Model * model) {
     // the three nice rectangles Mario made:

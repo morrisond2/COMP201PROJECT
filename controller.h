@@ -20,5 +20,6 @@ private:
     ofstream scoresfile;
     bool fileFailedOpen;
     int milliSeconds;
+    bool paused;
 };
 #endif

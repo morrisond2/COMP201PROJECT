@@ -82,7 +82,7 @@ void Model::spawn() {
      // Create a new piece
     shape = (Tetrominoe)(time(0)%7);
 	orientation = UP;
-	location.x = 4;
+	location.x = 3;
 	location.y = 0;
 }
 

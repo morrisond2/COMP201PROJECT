@@ -8,6 +8,7 @@ Controller::Controller() {
     view = new View("Tetris", 1024, 768);
     scoresfile.open("highscores.txt", ios::app);
     fileFailedOpen = false;
+    paused = false;
     if (scoresfile.fail()) {
         cout << "Outputfile failed to open." << endl;
         fileFailedOpen = true;
@@ -36,38 +37,57 @@ void Controller::loop() {
     direction[SDLK_RIGHT] = RIGHT;
 
     while(!model->gameOver()) {
-        currentTime = SDL_GetTicks();
-        // Do stuff here to animate as necessary
-        view->show(model);
-        if (currentTime > lastTime + milliSeconds) {
-            model->fall();
-            lastTime = currentTime;
-        }
-        if (SDL_PollEvent(&e) != 0) {
-            switch (e.type) {
-            case SDL_QUIT:
-                return;
-            case SDL_KEYDOWN:
-                switch(e.key.keysym.sym) {
-                case SDLK_UP:
-                case SDLK_DOWN:
-                case SDLK_LEFT:
-                case SDLK_RIGHT:
+        if (paused) {
+            view->showPause(model);
+            if (SDL_PollEvent(&e) != 0) {
+                switch (e.type) {
+                    case SDL_QUIT:
+                        return;
+                    case SDL_KEYDOWN:
+                        switch(e.key.keysym.sym) {
+                            case SDLK_p:
+                                paused = false;
+                                break;
+                        }
+                }
+            }
+        } else {
+            currentTime = SDL_GetTicks();
+            // Do stuff here to animate as necessary
+            view->show(model);
+            if (currentTime > lastTime + milliSeconds) {
+                model->fall();
+                lastTime = currentTime;
+            }
+            if (SDL_PollEvent(&e) != 0) {
+                switch (e.type) {
+                case SDL_QUIT:
+                    return;
+                case SDL_KEYDOWN:
+                    switch(e.key.keysym.sym) {
+                    case SDLK_UP:
+                    case SDLK_DOWN:
+                    case SDLK_LEFT:
+                    case SDLK_RIGHT:
                         model->go(direction[e.key.keysym.sym]);
                         break;
-                default:
+                    case SDLK_p:
+                        paused = true;
                         break;
+                    default:
+                        break;
+                    }
+                case SDL_MOUSEBUTTONDOWN:
+                    break;
                 }
-            case SDL_MOUSEBUTTONDOWN:
-                break;
             }
         }
     }
-    // TODO: show something nice?
     if (!fileFailedOpen) {
         scoresfile << endl << "Rows completed: " << model->score << "\t"
         << "(milli seconds between Tetrominoes: " << milliSeconds << ")" << endl;
     }
+    // TODO: show something nice?
     view->show(model);
     SDL_Delay(1000);
 }
