@@ -37,8 +37,9 @@ private:
 	Mix_Music* music = NULL;
     SDL_Window* window;
     SDL_Surface* screen;
-    SDL_Surface* text;
+    SDL_Surface* textPaused;
     SDL_Surface* text2;
+    string scoreString;
     bool fail;
     SDL_Surface* load(std::string path);
     TTF_Font * font;

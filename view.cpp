@@ -63,7 +63,8 @@ View::~View() {
     SDL_Quit();
     TTF_CloseFont( font );
     TTF_Quit();
-    SDL_FreeSurface(text);
+    SDL_FreeSurface(textPaused);
+    SDL_FreeSurface(text2);
     
     SDL_FreeSurface(BG);
     SDL_FreeSurface(IblockIMG);
@@ -75,11 +76,9 @@ View::~View() {
     SDL_FreeSurface(LblockIMG);
 }
 
-/**
- *  Load an image from a file to a SDL_Surface
- */
+
+// Load an image from a file to a SDL_Surface
 SDL_Surface* View::load(string path) {
-    // Load image
     SDL_Surface* optimizedSurface = NULL;
     SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
     if( loadedSurface == NULL ) {
@@ -92,15 +91,7 @@ SDL_Surface* View::load(string path) {
     return optimizedSurface;
 }
 
-
 void View::showPause(Model * model) {
-    
-    /*
-     
-     THIS IS THE PAUSE SCREEN
-     
-     */
-    
     // the three nice rectangles Mario made:
     SDL_Rect one;
     one.x=74;
@@ -111,7 +102,7 @@ void View::showPause(Model * model) {
     three.x=746;
     three.y=98;
     three.w=204;
-    three.h=404;
+    three.h=154;
     SDL_Rect onet;
     onet.x=76;
     onet.y=100;
@@ -121,7 +112,7 @@ void View::showPause(Model * model) {
     threet.x=748;
     threet.y=100;
     threet.w=200;
-    threet.h=400;
+    threet.h=150;
     
     SDL_Rect thinhorizontaltop;
     thinhorizontaltop.x = 350;
@@ -151,6 +142,29 @@ void View::showPause(Model * model) {
     pauseRectangle.h = 640;
     pauseRectangle.w = 320;
     
+    // the thin vertical lines in the Tetris grid:
+    int d=352;
+    SDL_Rect bottom[9];
+    for (int i=0;i<9;i++)
+    {
+        bottom[i].x=d+32;
+        bottom[i].y=32;
+        bottom[i].w=1;
+        bottom[i].h=704-64;
+        d=d+32;
+    }
+    // the thin horizontal lines in the Tetris grid:
+    int b=32;
+    SDL_Rect side[20];
+    for(int i = 0; i < 20; i++)
+    {
+        side[i].x=352;
+        side[i].y=b+32;
+        side[i].w=320;
+        side[i].h=1;
+        b=b+32;
+    }
+    
     // black background screen
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
     SDL_BlitSurface(BG,NULL,screen, NULL);
@@ -164,21 +178,61 @@ void View::showPause(Model * model) {
     SDL_FillRect(screen, &thinhorizontalbottom, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &thinvertical1, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &thinvertical2, SDL_MapRGB(screen->format, 0,0,255));
-    
-    /*
-     
-     THIS IS THE PAUSE SCREEN
-     
-     */
-    
+
     SDL_FillRect(screen, &pauseRectangle, SDL_MapRGB(screen->format, 255,255,255));
     
+    SDL_FillRects(screen, bottom, 9, SDL_MapRGB(screen->format, 64,64,64));
+    SDL_FillRects(screen, side, 20, SDL_MapRGB(screen->format, 64,64,64));
+    
+    // Choosing correct image based on block spawned
+    switch (model->shape) {
+        case I:
+            blockIMG = IblockIMG;
+            break;
+        case O:
+            blockIMG = OblockIMG;
+            break;
+        case T:
+            blockIMG = TblockIMG;
+            break;
+        case S:
+            blockIMG = SblockIMG;
+            break;
+        case Z:
+            blockIMG = ZblockIMG;
+            break;
+        case J:
+            blockIMG = JblockIMG;
+            break;
+        case L:
+            blockIMG = LblockIMG;
+            break;
+        case D:
+            break;
+        default:
+            break;
+    }
+    // making four 32 by 32 pixel blocks
+    SDL_Rect dest[4];
+    Coordinate * block = model->block();
+    for (int i = 0; i < 4; i++) {
+        dest[i].w = 32;
+        dest[i].h = 32;
+        dest[i].x = 352+ (block[i].x + model->location.x) * 32;
+        dest[i].y = 32 + (block[i].y + model->location.y) * 32;
+        SDL_FillRect(screen, &dest[i], SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
+    }
+    //SDL_BlitSurface calls for block images
+    for (int x = 0; x < 4; x++) {
+        SDL_BlitSurface(blockIMG, NULL, screen, &dest[x]);
+    }
+    
     SDL_Color textColor = { 0, 0, 0 };
-    text = TTF_RenderText_Solid( font, "Paused", textColor );
+    textPaused = TTF_RenderText_Solid( font, "Paused", textColor );
     SDL_Rect textDest;
     textDest.x = 352+110;
     textDest.y = 32+300;
-    SDL_BlitSurface( text, NULL, screen, &textDest );
+    SDL_BlitSurface( textPaused, NULL, screen, &textDest );
     
     SDL_Color textColor2 = { 255, 255, 255 };
     text2 = TTF_RenderText_Solid( font, "Press P to continue", textColor2 );
@@ -186,6 +240,14 @@ void View::showPause(Model * model) {
     textDest2.x = 750;
     textDest2.y = 400;
     SDL_BlitSurface( text2, NULL, screen, &textDest2 );
+    
+    scoreString = to_string(model->score);
+    SDL_Color textColorScore = { 255, 255, 255 };
+    text2 = TTF_RenderText_Solid( font, scoreString.c_str(), textColorScore );
+    SDL_Rect textDestScore;
+    textDestScore.x = 100;
+    textDestScore.y = 150;
+    SDL_BlitSurface( text2, NULL, screen, &textDestScore );
    
     SDL_UpdateWindowSurface(window);
 }
@@ -202,7 +264,7 @@ void View::show(Model * model) {
     three.x=746;
     three.y=98;
     three.w=204;
-    three.h=404;
+    three.h=154;
     SDL_Rect onet;
     onet.x=76;
     onet.y=100;
@@ -212,7 +274,7 @@ void View::show(Model * model) {
     threet.x=748;
     threet.y=100;
     threet.w=200;
-    threet.h=400;
+    threet.h=150;
     
     SDL_Rect thinhorizontaltop;
     thinhorizontaltop.x = 350;
@@ -316,7 +378,6 @@ void View::show(Model * model) {
 		dest[i].y = 32 + (block[i].y + model->location.y) * 32;
 		SDL_FillRect(screen, &dest[i], SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
 	}
-	
 	//SDL_BlitSurface calls for block images
 	for (int x = 0; x < 4; x++) {
 		SDL_BlitSurface(blockIMG, NULL, screen, &dest[x]);
@@ -378,11 +439,19 @@ void View::show(Model * model) {
     }
     
     SDL_Color textColor = { 255, 255, 255 };
-    text = TTF_RenderText_Solid( font, "Press P to pause", textColor );
+    textPaused = TTF_RenderText_Solid( font, "Press P to pause", textColor );
     SDL_Rect textDest;
     textDest.x = 750;
     textDest.y = 400;
-    SDL_BlitSurface( text, NULL, screen, &textDest );
+    SDL_BlitSurface( textPaused, NULL, screen, &textDest );
+    
+    scoreString = to_string(model->score);
+    SDL_Color textColorScore = { 255, 255, 255 };
+    text2 = TTF_RenderText_Solid( font, scoreString.c_str(), textColorScore );
+    SDL_Rect textDestScore;
+    textDestScore.x = 100;
+    textDestScore.y = 150;
+    SDL_BlitSurface( text2, NULL, screen, &textDestScore );
     
     SDL_UpdateWindowSurface(window);
 }
