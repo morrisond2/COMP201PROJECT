@@ -54,6 +54,7 @@ View::View(string title, int width, int height) {
     ZblockIMG = load("assets/Z.png");
     JblockIMG = load("assets/J.png");
     LblockIMG = load("assets/L.png");
+
 }
 
 View::~View() {
@@ -152,7 +153,6 @@ void View::showPause(Model * model) {
     
     // black background screen
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
-    BG = load("assets/TetrisBackground.jpeg");
     SDL_BlitSurface(BG,NULL,screen, NULL);
     
     // rest of the background rectangle stuff
@@ -173,7 +173,7 @@ void View::showPause(Model * model) {
     
     SDL_FillRect(screen, &pauseRectangle, SDL_MapRGB(screen->format, 255,255,255));
     
-    SDL_Color textColor = { 0, 255, 255 };
+    SDL_Color textColor = { 0, 0, 0 };
     text = TTF_RenderText_Solid( font, "Paused", textColor );
     SDL_Rect textDest;
     textDest.x = 352+110;
@@ -184,6 +184,7 @@ void View::showPause(Model * model) {
 }
 
 void View::show(Model * model) {
+    
     // the three nice rectangles Mario made:
     SDL_Rect one;
     one.x=74;
