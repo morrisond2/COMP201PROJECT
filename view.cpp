@@ -336,9 +336,7 @@ void View::show(Model * model) {
     SDL_FillRect(screen, &thinhorizontalbottom, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &thinvertical1, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &thinvertical2, SDL_MapRGB(screen->format, 0,0,255));
-    SDL_FillRects(screen, bottom, 9, SDL_MapRGB(screen->format, 64,64,64));
-    SDL_FillRects(screen, side, 20, SDL_MapRGB(screen->format, 64,64,64));
-
+    
     // Gray shape to show where it would land
     SDL_Rect shade[4];
     Coordinate * block = model->block();
@@ -348,8 +346,12 @@ void View::show(Model * model) {
         shade[i].h=32;
         shade[i].x= 352+ (block[i].x + model->shadeLocation().x)*32;
         shade[i].y= 32 + (block[i].y + model->shadeLocation().y)*32;
-        SDL_FillRect(screen, &shade[i], SDL_MapRGB(screen->format, 50,50,50));
+        SDL_FillRect(screen, &shade[i], SDL_MapRGB(screen->format, 120,120,120));
     }
+    
+    SDL_FillRects(screen, bottom, 9, SDL_MapRGB(screen->format, 64,64,64));
+    SDL_FillRects(screen, side, 20, SDL_MapRGB(screen->format, 64,64,64));
+
     
     // Choosing correct image based on block spawned
 	switch (model->shape) {
