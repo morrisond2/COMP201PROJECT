@@ -74,6 +74,9 @@ void Controller::loop() {
                     case SDLK_p:
                         paused = true;
                         break;
+                    case SDLK_SPACE:
+                        model->instantFall();
+                        break;
                     default:
                         break;
                     }
