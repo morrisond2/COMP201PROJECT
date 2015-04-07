@@ -339,6 +339,18 @@ void View::show(Model * model) {
     SDL_FillRects(screen, bottom, 9, SDL_MapRGB(screen->format, 64,64,64));
     SDL_FillRects(screen, side, 20, SDL_MapRGB(screen->format, 64,64,64));
 
+    // Gray shape to show where it would land
+    SDL_Rect shade[4];
+    Coordinate * block = model->block();
+    for (int i = 0; i<4; i++) {
+        int yco = 19;
+        shade[i].w=32;
+        shade[i].h=32;
+        shade[i].x= 352+ (block[i].x + model->shadeLocation().x)*32;
+        shade[i].y= 32 + (block[i].y + model->shadeLocation().y)*32;
+        SDL_FillRect(screen, &shade[i], SDL_MapRGB(screen->format, 50,50,50));
+    }
+    
     // Choosing correct image based on block spawned
 	switch (model->shape) {
 		case I:
@@ -370,7 +382,6 @@ void View::show(Model * model) {
 	
     // making four 32 by 32 pixel blocks
     SDL_Rect dest[4];
-	Coordinate * block = model->block();
 	for (int i = 0; i < 4; i++) {
 		dest[i].w = 32;
 		dest[i].h = 32;
@@ -382,7 +393,6 @@ void View::show(Model * model) {
 	for (int x = 0; x < 4; x++) {
 		SDL_BlitSurface(blockIMG, NULL, screen, &dest[x]);
 	}
-	
     
     for (int i=0; i<20; i++) {
         for (int j=0; j<10; j++) {

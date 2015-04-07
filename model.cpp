@@ -159,6 +159,26 @@ void Model::fall() { // (and do collision detection)
     location.y++;
 }
 
+Coordinate Model::shadeLocation() {
+    Coordinate * blck = block();
+    Coordinate futureLocation;
+    futureLocation.x = location.x;
+    for (futureLocation.y = location.y; futureLocation.y<20; futureLocation.y++) {
+        for (int i = 0; i < 4; i++) {
+            if (grid[blck[i].y+futureLocation.y+1][blck[i].x+location.x]) {
+                return futureLocation;
+            }
+        }
+    }
+    futureLocation.y = 19;
+    return futureLocation;
+}
+
+void Model::instantFall() {
+    Coordinate newLocation = shadeLocation();
+    location = newLocation;
+}
+
 Coordinate Model::right() {
     blockLocation.x = 0;
 	Coordinate * blck = block();

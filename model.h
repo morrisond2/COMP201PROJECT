@@ -60,6 +60,10 @@ public:
     Tetrominoe colorGrid[20][10];
     // how many rows completed
     int score;
+    // where would it land?
+    Coordinate shadeLocation();
+    // space bar
+    void instantFall();
 private:
     // size of the model
     int height, width;
