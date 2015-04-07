@@ -66,3 +66,9 @@ Rows completed: 0	(milli seconds between Tetrominoes: 1)
 Rows completed: 0	(milli seconds between Tetrominoes: 1)
 
 Rows completed: 14	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 3	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 2	(milli seconds between Tetrominoes: 200)
