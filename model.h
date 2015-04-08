@@ -38,7 +38,7 @@ public:
     // Build up the pile
     void build();
 	// Get the current block
-	Coordinate * block();
+	Coordinate * block(Tetrominoe inputShape);
     // get the most right block of the falling Tetrominoe
 	Coordinate right();
     // get the most left block of the falling Tetrominoe
@@ -70,6 +70,8 @@ public:
     Coordinate shadeLocation();
     // space bar
     void instantFall();
+    // next block
+    Tetrominoe nextShape;
 private:
     // size of the model
     int height, width;
