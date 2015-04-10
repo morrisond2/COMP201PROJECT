@@ -59,7 +59,13 @@ public:
     // visible grid
     Tetrominoe colorGrid[20][10];
     // how many rows completed
+    int rowCount;
+    // actual score
     int score;
+    // bonusss for more rows at once
+    int multiplier;
+    // use multiplier to
+    void calculateScore();
     // where would it land?
     Coordinate shadeLocation();
     // space bar

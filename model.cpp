@@ -9,6 +9,8 @@ Model::Model(int h, int w) {
     ended = false;
     height = h;
     width = w;
+    rowCount = 0;
+    multiplier = 0;
     score = 0;
     dontmove = false;
     shape = (Tetrominoe)(time(0)%7);
@@ -54,6 +56,7 @@ void Model::checkRows() {
             complete = true;
         } else {
             deleteRow(i);
+            multiplier++;
         }
     }
 }
@@ -72,7 +75,7 @@ void Model::deleteRow(int row) {
         colorGrid[0][j] = D;
         grid[0][j] = false;
     }
-    score++;
+    rowCount++;
 }
 
 void Model::spawn() {
@@ -144,7 +147,28 @@ void Model::build() {
         colorGrid[blck[i].y+location.y][blck[i].x+location.x] = shape;
     }
     checkRows();
+    calculateScore();
+    multiplier = 0;
     spawn();
+}
+
+void Model::calculateScore() {
+    switch (multiplier) {
+        case 1:
+            score = score + 100;
+            break;
+        case 2:
+            score = score + 300;
+            break;
+        case 3:
+            score = score + 600;
+            break;
+        case 4:
+            score = score + 1000;
+            break;
+        default:
+            break;
+    }
 }
 
 void Model::fall() { // (and do collision detection)

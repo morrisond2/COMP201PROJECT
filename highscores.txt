@@ -100,3 +100,21 @@ Rows completed: 0	(milli seconds between Tetrominoes: 200)
 >>>>>>> 15dbf29e37c649ed7253b3596b358522cbaf1a1b
 
 Rows completed: 0	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 3	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 2	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 4	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 4	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 32	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 12	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 21	(milli seconds between Tetrominoes: 200)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 200)
