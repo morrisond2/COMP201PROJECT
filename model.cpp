@@ -13,7 +13,10 @@ Model::Model(int h, int w) {
     multiplier = 0;
     score = 0;
     dontmove = false;
-    shape = (Tetrominoe)(time(0)%7);
+    // initialize random seed
+    srand(time(NULL));
+    shape = (Tetrominoe)(rand()%7);
+    nextShape = (Tetrominoe)(rand()%7);
     // for later checks
     blockLocation.x=0;
     blockLocation.y=0;
@@ -83,13 +86,14 @@ void Model::spawn() {
         return;
     }
      // Create a new piece
-    shape = (Tetrominoe)(time(0)%7);
+    shape = nextShape;
+    nextShape = (Tetrominoe)(rand()%7);
 	orientation = UP;
 	location.x = 3;
 	location.y = 0;
 }
 
-Coordinate * Model::block() {
+Coordinate * Model::block(Tetrominoe inputShape) {
 	// All blocks by orientation and shape
 	// block[orientation][shape]
 	// Treat as a constant
@@ -136,12 +140,12 @@ Coordinate * Model::block() {
 	
 };
     // Building blocks for Tetrominoes
-	return blocks[orientation][shape];
+	return blocks[orientation][inputShape];
 }
 
 // This should build up the pile structure
 void Model::build() {
-    Coordinate * blck = block();
+    Coordinate * blck = block(shape);
     for (int i =  0; i < 4; i++) {
         grid[blck[i].y+location.y][blck[i].x+location.x] = true;
         colorGrid[blck[i].y+location.y][blck[i].x+location.x] = shape;
@@ -172,7 +176,7 @@ void Model::calculateScore() {
 }
 
 void Model::fall() { // (and do collision detection)
-    Coordinate * blck = block();
+    Coordinate * blck = block(shape);
     for (int i = 0; i < 4; i++) {
         if (grid[blck[i].y+location.y + 1][blck[i].x+location.x]) {
             // yay collision
@@ -184,7 +188,7 @@ void Model::fall() { // (and do collision detection)
 }
 
 Coordinate Model::shadeLocation() {
-    Coordinate * blck = block();
+    Coordinate * blck = block(shape);
     Coordinate futureLocation;
     futureLocation.x = location.x;
     for (futureLocation.y = location.y; futureLocation.y<20; futureLocation.y++) {
@@ -205,7 +209,7 @@ void Model::instantFall() {
 
 Coordinate Model::right() {
     blockLocation.x = 0;
-	Coordinate * blck = block();
+	Coordinate * blck = block(shape);
 	for (int i =  0; i < 4; i++) {
 		if (blck[i].x + location.x > blockLocation.x) {
 			blockLocation.x = (blck[i].x + location.x);
@@ -217,7 +221,7 @@ Coordinate Model::right() {
 // we still need to fix that shapes can't go left or right into an earlier shape...
 Coordinate Model::left() {
     blockLocation.x = 9;
-    Coordinate * blck = block();
+    Coordinate * blck = block(shape);
     for (int i =  0; i < 4; i++) {
         if (blck[i].x + location.x < blockLocation.x) {
             blockLocation.x = (blck[i].x + location.x);
@@ -228,7 +232,7 @@ Coordinate Model::left() {
 }
 
 void Model::go(Direction d) {
-    Coordinate * blck = block();
+    Coordinate * blck = block(shape);
     if (d == LEFT) {
         for (int i=0; i<4; i++) {
             if (grid[blck[i].y+location.y][blck[i].x+location.x-1]) {

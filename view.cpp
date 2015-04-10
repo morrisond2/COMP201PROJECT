@@ -59,14 +59,14 @@ View::View(string title, int width, int height) {
 
 View::~View() {
     SDL_DestroyWindow(window);
-    IMG_Quit();
-    SDL_Quit();
-    TTF_CloseFont( font );
-    TTF_Quit();
+    
+    /*
     SDL_FreeSurface(textPaused);
     SDL_FreeSurface(text2);
     
     SDL_FreeSurface(BG);
+    SDL_FreeSurface(blockIMG);
+    SDL_FreeSurface(nextBlockIMG);
     SDL_FreeSurface(IblockIMG);
     SDL_FreeSurface(OblockIMG);
     SDL_FreeSurface(TblockIMG);
@@ -74,6 +74,12 @@ View::~View() {
     SDL_FreeSurface(ZblockIMG);
     SDL_FreeSurface(JblockIMG);
     SDL_FreeSurface(LblockIMG);
+    */
+    
+    IMG_Quit();
+    SDL_Quit();
+    TTF_CloseFont( font );
+    TTF_Quit();
 }
 
 
@@ -214,13 +220,12 @@ void View::showPause(Model * model) {
     }
     // making four 32 by 32 pixel blocks
     SDL_Rect dest[4];
-    Coordinate * block = model->block();
+    Coordinate * block = model->block(model->shape);
     for (int i = 0; i < 4; i++) {
         dest[i].w = 32;
         dest[i].h = 32;
         dest[i].x = 352+ (block[i].x + model->location.x) * 32;
         dest[i].y = 32 + (block[i].y + model->location.y) * 32;
-        SDL_FillRect(screen, &dest[i], SDL_MapRGB(screen->format, 0x80, 0x00, 0x00));
     }
     //SDL_BlitSurface calls for block images
     for (int x = 0; x < 4; x++) {
@@ -253,6 +258,7 @@ void View::showPause(Model * model) {
 }
 
 void View::show(Model * model) {
+    
     
     // the three nice rectangles Mario made:
     SDL_Rect one;
@@ -297,7 +303,6 @@ void View::show(Model * model) {
     thinvertical2.h = 640;
     thinvertical2.w = 2;
     
-    
     // the thin vertical lines in the Tetris grid:
     int d=352;
     SDL_Rect bottom[9];
@@ -308,7 +313,6 @@ void View::show(Model * model) {
         bottom[i].w=1;
         bottom[i].h=704-64;
         d=d+32;
-        
     }
     
     // the thin horizontal lines in the Tetris grid:
@@ -337,9 +341,50 @@ void View::show(Model * model) {
     SDL_FillRect(screen, &thinvertical1, SDL_MapRGB(screen->format, 0,0,255));
     SDL_FillRect(screen, &thinvertical2, SDL_MapRGB(screen->format, 0,0,255));
     
+    switch (model->nextShape) {
+        case I:
+            nextBlockIMG = IblockIMG;
+            break;
+        case O:
+            nextBlockIMG = OblockIMG;
+            break;
+        case T:
+            nextBlockIMG = TblockIMG;
+            break;
+        case S:
+            nextBlockIMG = SblockIMG;
+            break;
+        case Z:
+            nextBlockIMG = ZblockIMG;
+            break;
+        case J:
+            nextBlockIMG = JblockIMG;
+            break;
+        case L:
+            nextBlockIMG = LblockIMG;
+            break;
+        case D:
+            break;
+        default:
+            break;
+    }
+    // making four 32 by 32 pixel blocks
+    SDL_Rect destNext[4];
+    Coordinate * blockNext = model->block(model->nextShape);
+    for (int i = 0; i < 4; i++) {
+        destNext[i].w = 32;
+        destNext[i].h = 32;
+        destNext[i].x = 800+ (blockNext[i].x) * 32;
+        destNext[i].y = 120+ (blockNext[i].y) * 32;
+    }
+    //SDL_BlitSurface calls for block images
+    for (int x = 0; x < 4; x++) {
+        SDL_BlitSurface(nextBlockIMG, NULL, screen, &destNext[x]);
+    }
+    
     // Gray shape to show where it would land
     SDL_Rect shade[4];
-    Coordinate * block = model->block();
+    Coordinate * block = model->block(model->shape);
     for (int i = 0; i<4; i++) {
         int yco = 19;
         shade[i].w=32;
@@ -446,7 +491,6 @@ void View::show(Model * model) {
                 default:
                     break;
             }
-            
         }
     }
     

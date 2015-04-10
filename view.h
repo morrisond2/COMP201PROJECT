@@ -46,6 +46,7 @@ private:
     SDL_Surface* BG = NULL;
 //    Mix_Chunk * food;
     SDL_Surface* blockIMG = NULL;
+    SDL_Surface* nextBlockIMG = NULL;
     SDL_Surface* IblockIMG = NULL;
     SDL_Surface* OblockIMG = NULL;
     SDL_Surface* TblockIMG = NULL;
