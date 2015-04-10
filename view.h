@@ -33,6 +33,8 @@ public:
     void show(Model * model);
     // Print out a pause screen
     void showPause(Model * model);
+    // Print out a start screen before the game begins
+    void showStartScreen(Model* model);
 private:
 	Mix_Music* music = NULL;
     SDL_Window* window;

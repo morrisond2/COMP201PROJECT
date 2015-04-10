@@ -97,6 +97,101 @@ SDL_Surface* View::load(string path) {
     return optimizedSurface;
 }
 
+void View::showStartScreen(Model* model) {
+    // the three nice rectangles Mario made:
+    SDL_Rect one;
+    one.x=74;
+    one.y=98;
+    one.w=204;
+    one.h=154;
+    SDL_Rect three;
+    three.x=746;
+    three.y=98;
+    three.w=204;
+    three.h=154;
+    SDL_Rect onet;
+    onet.x=76;
+    onet.y=100;
+    onet.w=200;
+    onet.h=150;
+    SDL_Rect threet;
+    threet.x=748;
+    threet.y=100;
+    threet.w=200;
+    threet.h=150;
+    
+    SDL_Rect thinhorizontaltop;
+    thinhorizontaltop.x = 350;
+    thinhorizontaltop.y = 30;
+    thinhorizontaltop.w = 324;
+    thinhorizontaltop.h = 2;
+    SDL_Rect thinhorizontalbottom;
+    thinhorizontalbottom.x = 350;
+    thinhorizontalbottom.y = 672;
+    thinhorizontalbottom.w = 324;
+    thinhorizontalbottom.h = 2;
+    SDL_Rect thinvertical1;
+    thinvertical1.x = 350;
+    thinvertical1.y = 32;
+    thinvertical1.h = 640;
+    thinvertical1.w = 2;
+    SDL_Rect thinvertical2;
+    thinvertical2.x = 672;
+    thinvertical2.y = 32;
+    thinvertical2.h = 640;
+    thinvertical2.w = 2;
+    
+    // the thin vertical lines in the Tetris grid:
+    int d=352;
+    SDL_Rect bottom[9];
+    for (int i=0;i<9;i++)
+    {
+        bottom[i].x=d+32;
+        bottom[i].y=32;
+        bottom[i].w=1;
+        bottom[i].h=704-64;
+        d=d+32;
+    }
+    
+    // the thin horizontal lines in the Tetris grid:
+    int b=32;
+    SDL_Rect side[20];
+    for(int i = 0; i < 20; i++)
+    {
+        side[i].x=352;
+        side[i].y=b+32;
+        side[i].w=320;
+        side[i].h=1;
+        b=b+32;
+    }
+    
+    // black background screen
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_BlitSurface(BG,NULL,screen, NULL);
+    
+    // rest of the background rectangle stuff
+    SDL_FillRect(screen, &one, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &three, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &onet, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_FillRect(screen, &threet, SDL_MapRGB(screen->format, 0,0,0));
+    SDL_FillRect(screen, &thinhorizontaltop, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &thinhorizontalbottom, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &thinvertical1, SDL_MapRGB(screen->format, 0,0,255));
+    SDL_FillRect(screen, &thinvertical2, SDL_MapRGB(screen->format, 0,0,255));
+    
+    SDL_FillRects(screen, bottom, 9, SDL_MapRGB(screen->format, 64,64,64));
+    SDL_FillRects(screen, side, 20, SDL_MapRGB(screen->format, 64,64,64));
+    
+    SDL_Color textColor2 = { 255, 255, 255 };
+    text2 = TTF_RenderText_Solid( font, "Press spacebar to start", textColor2 );
+    SDL_Rect textDest2;
+    textDest2.x = 366;
+    textDest2.y = 350;
+    SDL_BlitSurface( text2, NULL, screen, &textDest2 );
+    
+    SDL_UpdateWindowSurface(window);
+}
+
 void View::showPause(Model * model) {
     // the three nice rectangles Mario made:
     SDL_Rect one;

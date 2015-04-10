@@ -21,5 +21,6 @@ private:
     bool fileFailedOpen;
     int milliSeconds;
     bool paused;
+    bool started;
 };
 #endif
