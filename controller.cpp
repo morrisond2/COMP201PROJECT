@@ -9,6 +9,7 @@ Controller::Controller() {
     scoresfile.open("highscores.txt", ios::app);
     fileFailedOpen = false;
     paused = false;
+    started = false;
     if (scoresfile.fail()) {
         cout << "Outputfile failed to open." << endl;
         fileFailedOpen = true;
@@ -35,6 +36,22 @@ void Controller::loop() {
     direction[SDLK_DOWN] = DOWN;
     direction[SDLK_LEFT] = LEFT;
     direction[SDLK_RIGHT] = RIGHT;
+    
+    while (!started) {
+        view->showStartScreen(model);
+        if (SDL_PollEvent(&e) != 0) {
+            switch (e.type) {
+                case SDL_QUIT:
+                    return;
+                case SDL_KEYDOWN:
+                    switch(e.key.keysym.sym) {
+                        case SDLK_SPACE:
+                            started = true;
+                            break;
+                    }
+            }
+        }
+    }
 
     while(!model->gameOver()) {
         if (paused) {
@@ -91,6 +108,6 @@ void Controller::loop() {
         << "(milli seconds between Tetrominoes: " << milliSeconds << ")" << endl;
     }
     // TODO: show something nice?
-    view->show(model);
-    SDL_Delay(1000);
+    view->showGameOver(model);
+    SDL_Delay(5000);
 }

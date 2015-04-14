@@ -1,4 +1,5 @@
 Minimum Goals
+
 we have done so far:
 -pieces need to rotate
 -one button instant drop to to bottom
@@ -7,12 +8,13 @@ we have done so far:
 -draw pieces from images or live build them in the code
 -end when next piece starts where a piece is placed
 -highscores text file (sort highest to lowest?)
-still need to do:
--UI - say game over when lost then after a few seconds ask to record score
-    - Tetris at top of screen somewhere
 -pieces randomly selected for order (7 pieces)
 -award points for row, more points for multiple rows via doubling
 -show first next piece
+
+still need to do:
+-UI - say game over when lost then after a few seconds ask to record score
+    - Tetris at top of screen somewhere
 
 Ideal Goals (to be done once minimum have been met)
 - hold piece

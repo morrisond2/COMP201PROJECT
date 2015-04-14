@@ -33,6 +33,10 @@ public:
     void show(Model * model);
     // Print out a pause screen
     void showPause(Model * model);
+    // Print out a start screen before the game begins
+    void showStartScreen(Model* model);
+    // Print out gameover screen
+    void showGameOver(Model * model);
 private:
 	Mix_Music* music = NULL;
     SDL_Window* window;
@@ -43,6 +47,7 @@ private:
     bool fail;
     SDL_Surface* load(std::string path);
     TTF_Font * font;
+    TTF_Font * font2;
     SDL_Surface* BG = NULL;
 //    Mix_Chunk * food;
     SDL_Surface* blockIMG = NULL;
