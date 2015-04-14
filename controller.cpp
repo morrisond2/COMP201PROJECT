@@ -108,6 +108,6 @@ void Controller::loop() {
         << "(milli seconds between Tetrominoes: " << milliSeconds << ")" << endl;
     }
     // TODO: show something nice?
-    view->show(model);
+    view->showGameOver(model);
     SDL_Delay(5000);
 }

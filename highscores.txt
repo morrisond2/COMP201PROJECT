@@ -138,3 +138,19 @@ Rows completed: 57	(milli seconds between Tetrominoes: 250)
 Rows completed: 1	(milli seconds between Tetrominoes: 250)
 
 Rows completed: 11	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 5	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 13	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 5	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 0	(milli seconds between Tetrominoes: 250)
+
+Rows completed: 42	(milli seconds between Tetrominoes: 250)

@@ -45,6 +45,7 @@ View::View(string title, int width, int height) {
     }
 //    food = Mix_LoadWAV("assets/yummy.wav");
     font = TTF_OpenFont( "assets/LiberationSans-Regular.ttf", 28 );
+    font2 = TTF_OpenFont( "assets/LiberationSans-Regular.ttf", 36 );
     
     BG = load("assets/TetrisBackground.jpeg");
     IblockIMG = load("assets/I.png");
@@ -188,6 +189,38 @@ void View::showStartScreen(Model* model) {
     textDest2.x = 366;
     textDest2.y = 350;
     SDL_BlitSurface( text2, NULL, screen, &textDest2 );
+    
+    SDL_UpdateWindowSurface(window);
+}
+
+void View::showGameOver(Model* model) {
+    
+    // black background screen
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
+    // background image (BG)
+    SDL_BlitSurface(BG,NULL,screen, NULL);
+    
+    SDL_Color textColor2 = { 255, 255, 255 };
+    text2 = TTF_RenderText_Solid( font2, "Game Over!", textColor2 );
+    SDL_Rect textDest2;
+    textDest2.x = 420;
+    textDest2.y = 330;
+    SDL_BlitSurface( text2, NULL, screen, &textDest2 );
+    
+    SDL_Color textColor = { 255, 255, 255 };
+    textPaused = TTF_RenderText_Solid( font2, "Your final score:", textColor );
+    SDL_Rect textDest;
+    textDest.x = 400;
+    textDest.y = 380;
+    SDL_BlitSurface( textPaused, NULL, screen, &textDest );
+    
+    scoreString = to_string(model->score);
+    SDL_Color textColorScore = { 255, 255, 255 };
+    text2 = TTF_RenderText_Solid( font2, scoreString.c_str(), textColorScore );
+    SDL_Rect textDestScore;
+    textDestScore.x = 470;
+    textDestScore.y = 430;
+    SDL_BlitSurface( text2, NULL, screen, &textDestScore );
     
     SDL_UpdateWindowSurface(window);
 }
